@@ -1,3 +1,7 @@
 /** @type {import("next").NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  async redirects() {
+    return [{ source: "/projects/moonlight-ai", destination: "/moonlight", permanent: true }];
+  },
+};
 export default nextConfig;

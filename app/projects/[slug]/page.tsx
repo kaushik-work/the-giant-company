@@ -9,7 +9,7 @@ import { getProject, projects } from "@/lib/projects";
 import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return projects.filter((p) => p.slug !== "moonlight-ai").map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

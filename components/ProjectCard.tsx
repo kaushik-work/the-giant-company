@@ -7,7 +7,7 @@ export default function ProjectCard({ p, span = 2 }: { p: Project; span?: number
   const dark = !p.logo || p.logoDark;
   return (
     <Link
-      href={`/projects/${p.slug}`}
+      href={p.slug === "moonlight-ai" ? "/moonlight" : `/projects/${p.slug}`}
       className={`pcard${wide ? " pcard-wide" : ""}${dark ? " pcard-dark" : ""}`}
       style={{ "--span": span } as React.CSSProperties}
     >

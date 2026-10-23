@@ -31,7 +31,7 @@ export default function Home() {
     itemListElement: projects.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      url: `${SITE_URL}/projects/${p.slug}`,
+      url: `${SITE_URL}${p.slug === "moonlight-ai" ? "/moonlight" : `/projects/${p.slug}`}`,
       name: p.name,
     })),
   };
@@ -82,37 +82,6 @@ export default function Home() {
 
         {/* TRUSTED */}
         <TrustedStrip />
-
-        {/* MOONLIGHT */}
-        <section id="moonlight" className="section dark">
-          <div className="container">
-            <div className="moon-panel center">
-            <p className="eyebrow">Featured · AI product</p>
-            <h2>Meet Moonlight.<br /><em>Trripah&apos;s AI trip planner.</em></h2>
-            <p className="section-sub">
-              A Claude-powered travel chatbot with a personality. She adapts to Gen Z, millennials and
-              older travellers, knows 65 destinations, plans the itinerary in conversation and hands a
-              ready lead to the sales team — without ever quoting a price.
-            </p>
-            <div className="hero-cta">
-              <Link className="btn btn-red" href="/projects/moonlight-ai">Explore Moonlight</Link>
-              <Link className="link-arrow" href="/projects/moonlight-ai">How it works</Link>
-            </div>
-            <div className="chat" aria-hidden="true">
-              <div className="bubble me">I want to go to Japan for 7 days</div>
-              <div className="bubble ai">Japan in October is *chef&apos;s kiss*. Are you going solo or with someone?</div>
-              <div className="bubble me">With my partner — we love food</div>
-              <div className="bubble ai">Perfect. Tokyo → Kyoto → Osaka is a foodie dream. Can I get your WhatsApp so the team can send the quote?</div>
-            </div>
-            <ul className="pillars">
-              <li><strong>Persona-driven</strong><span>Tone adapts to the traveller</span></li>
-              <li><strong>65 destinations</strong><span>Knowledge loaded on demand</span></li>
-              <li><strong>Lead capture</strong><span>Straight into the CRM</span></li>
-              <li><strong>Everywhere</strong><span>Web, CRM and mobile app</span></li>
-            </ul>
-            </div>
-          </div>
-        </section>
 
         {/* SERVICES */}
         <section id="services" className="section">

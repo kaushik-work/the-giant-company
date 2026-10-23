@@ -72,7 +72,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
         <section className="section pt0">
           <div className="container">
-            <div className="bento">
+            <div className="bento compact">
               {s.points.map((p, i) => (
                 <article className="tile" style={{ "--span": 3 } as React.CSSProperties} key={p.title}>
                   <span className="num">0{i + 1}</span>

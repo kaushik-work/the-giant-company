@@ -19,7 +19,7 @@ export function GET() {
 ${services.map((s) => `- [${s.title}](${SITE_URL}/services/${s.slug}): ${s.text}`).join("\n")}
 
 ## Projects
-${projects.map((p) => `- [${p.name}](${SITE_URL}/projects/${p.slug}) (${p.industry}): ${p.summary}`).join("\n")}
+${projects.map((p) => `- [${p.name}](${SITE_URL}${p.slug === "moonlight-ai" ? "/moonlight" : `/projects/${p.slug}`}) (${p.industry}): ${p.summary}`).join("\n")}
 
 ## FAQ
 ${faqs.map((f) => `### ${f.q}\n${f.a}`).join("\n\n")}

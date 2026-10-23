@@ -15,7 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/terms-and-conditions`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    ...projects.map((p) => ({
+    { url: `${SITE_URL}/moonlight`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    ...projects.filter((p) => p.slug !== "moonlight-ai").map((p) => ({
       url: `${SITE_URL}/projects/${p.slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
