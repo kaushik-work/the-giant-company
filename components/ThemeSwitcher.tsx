@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 const themes = [
   { id: "noir", label: "Black & red", color: "linear-gradient(135deg,#0b0b0f 45%,#ff3131 55%)" },
-  { id: "mint", label: "Mint", color: "linear-gradient(135deg,#0fa968,#84cc16)" },
-  { id: "sunny", label: "Sunny", color: "linear-gradient(135deg,#f26b00,#ffb000)" },
+  { id: "bloom", label: "Navy, cobalt & red", color: "linear-gradient(135deg,#021861 35%,#255dce 35% 65%,#de1110 65%)" },
+  { id: "earth", label: "Charcoal & amber", color: "linear-gradient(135deg,#090907 35%,#6c5636 35% 65%,#b99d73 65%)" },
 ];
 
 // Temporary picker for choosing the final palette. Remove once a theme is chosen.

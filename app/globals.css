@@ -1,7 +1,7 @@
 /* ===== Theme tokens (switch with data-theme on <html>) ===== */
-[data-theme="noir"], :root { --accent: #ff3131; --accent-rgb: 255,49,49; --accent-2: #ff6a3d; --accent-light: #ff5a5a; --accent-deep: #8a0000; --accent-hover: #e82424; --accent-soft: #ffb3b3; --accent-tint: #fff1f1; --dark: #0b0b0f; --sun: #ffc83d; --sun-rgb: 255,200,61; }
-[data-theme="mint"] { --accent: #0fa968; --accent-rgb: 15,169,104; --accent-2: #84cc16; --accent-light: #34d399; --accent-deep: #067a46; --accent-hover: #0b9459; --accent-soft: #b5f2d3; --accent-tint: #ecfdf5; --dark: #0a8f55; --sun: #ffe45c; --sun-rgb: 255,228,92; }
-[data-theme="sunny"] { --accent: #f26b00; --accent-rgb: 242,107,0; --accent-2: #ffb000; --accent-light: #ffa24d; --accent-deep: #c24e00; --accent-hover: #d95f00; --accent-soft: #ffd9b3; --accent-tint: #fff4e8; --dark: #e8590c; --sun: #ffd23f; --sun-rgb: 255,210,63; }
+[data-theme="noir"], :root { --accent: #ff3131; --accent-rgb: 255,49,49; --accent-2: #ff6a3d; --accent-light: #ff5a5a; --accent-deep: #8a0000; --accent-hover: #e82424; --accent-soft: #ffb3b3; --accent-tint: #fff1f1; --dark: #0b0b0f; --sun: #ffc83d; --sun-rgb: 255,200,61;  --panel-1-rgb: 255,49,49; --panel-2-rgb: 255,49,49; }
+[data-theme="bloom"] { --accent: #de1110; --accent-rgb: 222,17,16; --accent-2: #f04a3f; --accent-light: #f0443f; --accent-deep: #a30a0a; --accent-hover: #c40e0d; --accent-soft: #ffb3b0; --accent-tint: #fff1f0; --dark: #021861; --sun: #255dce; --sun-rgb: 37,93,206; --panel-1-rgb: 222,17,16; --panel-2-rgb: 37,93,206; }
+[data-theme="earth"] { --accent: #6c5636; --accent-rgb: 108,86,54; --accent-2: #b99d73; --accent-light: #b99d73; --accent-deep: #4a3a22; --accent-hover: #5a4527; --accent-soft: #e0d2b8; --accent-tint: #f7f2e9; --dark: #090907; --sun: #b99d73; --sun-rgb: 185,157,115; --panel-1-rgb: 185,157,115; --panel-2-rgb: 108,86,54; }
 :root {
   --bg: #ffffff;
   --bg-alt: #f6f5f3;
@@ -621,19 +621,19 @@ em { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit
 @media (max-width: 760px) { .theme-switch { bottom: 82px; } }
 
 /* ===== Black & red theme: black panels with red highlights ===== */
-[data-theme="noir"] .hero-tile,
-[data-theme="noir"] .moon-panel,
-[data-theme="noir"] .glass-stats,
-[data-theme="noir"] .tile-dark,
-[data-theme="noir"] .pcard-dark .pcard-media,
-[data-theme="noir"] .project-banner-dark {
+.hero-tile,
+.moon-panel,
+.glass-stats,
+.tile-dark,
+.pcard-dark .pcard-media,
+.project-banner-dark {
   background:
-    radial-gradient(circle at 10% 0%, rgba(255,49,49,.62) 0, transparent 34%),
-    radial-gradient(circle at 100% 100%, rgba(255,49,49,.38) 0, transparent 36%),
-    #0b0b0f !important;
+    radial-gradient(circle at 10% 0%, rgba(var(--panel-1-rgb), .62) 0, transparent 34%),
+    radial-gradient(circle at 100% 100%, rgba(var(--panel-2-rgb), .5) 0, transparent 38%),
+    var(--dark) !important;
 }
 [data-theme="noir"] .hero-tile::before, [data-theme="noir"] .hero-tile::after { opacity: .28; }
-[data-theme="noir"] .glass-stats .hot, [data-theme="noir"] .stat-cards .hot { background: linear-gradient(135deg, #ff3131, #ff6a3d); }
+
 
 /* ================= Shadow play ================= */
 :root {
