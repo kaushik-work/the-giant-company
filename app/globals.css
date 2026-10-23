@@ -775,3 +775,9 @@ em { letter-spacing: .005em; }
 .trust-track { animation-duration: 40s; }
 .trust-label { color: var(--text); letter-spacing: .04em; font-size: .85rem; }
 @media (max-width: 760px) { .trust-label { letter-spacing: .02em; font-size: .78rem; } }
+
+/* Shadows must not be clipped or painted over by neighbouring sections */
+.hero { overflow: visible; }
+.hero-tile, .moon-panel, .glass-stats, .tile, .pcard, .info-card, .card, .process-step, .steps li { position: relative; z-index: 1; }
+.hero-tile, .moon-panel { overflow: hidden; } /* clips only inner glows; its own shadow still renders */
+.trusted { background: transparent; }
