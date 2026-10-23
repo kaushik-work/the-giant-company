@@ -18,12 +18,12 @@ export const services = [
 ];
 
 export const projects = [
-  { name: "Keerthi Builders", industry: "Real Estate", text: "Corporate website and lead-generation platform.", cls: "t1" },
+  { name: "Keerthi Builders", logo: "/logos/keerthi-builders.png", industry: "Real Estate", text: "Corporate website and lead-generation platform.", cls: "t1" },
   { name: "St. Francis College", industry: "Education", text: "Campus placement-management platform.", cls: "t2" },
   { name: "Nap Meridian Exim", industry: "Export & Import", text: "Business website and digital workflow system.", cls: "t3" },
   { name: "RealRoadies", industry: "Adventure Tourism", text: "Tour-operations platform for bike expeditions.", cls: "t2" },
-  { name: "Trripah Travel", industry: "Travel & Tourism", text: "Travel booking and lead-generation platform.", cls: "t3" },
-  { name: "Trripah CRM Suite", industry: "Travel Technology", text: "CRM for travel quotation and sales automation.", cls: "t1" },
+  { name: "Trripah Travel", logo: "/logos/trripah-travel.png", industry: "Travel & Tourism", text: "Travel booking and lead-generation platform.", cls: "t3" },
+  { name: "Trripah CRM Suite", logo: "/logos/trripah-crm.png", industry: "Travel Technology", text: "CRM for travel quotation and sales automation.", cls: "t1" },
 ];
 
 export const steps = [

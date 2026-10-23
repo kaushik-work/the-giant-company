@@ -128,3 +128,6 @@ input.invalid, textarea.invalid { border-color: #e74c3c; }
 .logo-line { display: flex; gap: .25em; }
 .logo-red { color: #ff3131; }
 .site-header .logo { display: inline-flex; }
+
+.thumb-logo { background: #fff; padding: 24px; }
+.thumb-logo img { max-width: 70%; max-height: 100%; object-fit: contain; }

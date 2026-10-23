@@ -62,7 +62,9 @@ export default function Home() {
             <div className="grid grid-3">
               {projects.map((p) => (
                 <article className="project" key={p.name}>
-                  <div className={`thumb ${p.cls}`}>{p.name}</div>
+                  <div className={`thumb ${"logo" in p ? "thumb-logo" : p.cls}`}>
+                    {"logo" in p ? <img src={p.logo} alt={`${p.name} logo`} loading="lazy" /> : p.name}
+                  </div>
                   <h3>{p.name}</h3><p>{p.text}</p><span className="tag">{p.industry}</span>
                 </article>
               ))}
