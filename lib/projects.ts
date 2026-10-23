@@ -6,6 +6,7 @@ export type Project = {
   summary: string;
   overview: string;
   logo?: string;
+  logoDark?: boolean;
   url?: string;
   emoji?: string;
   cls: string;
@@ -83,6 +84,7 @@ export const projects: Project[] = [
     overview:
       "The public face of Trripah: a content-rich travel site that turns browsers into enquiries. It combines SEO-driven destination content with tools — Moonlight AI planner, quick quotes, a flight-deal finder and online payments — all connected to the CRM.",
     logo: "/logos/trripah-travel.png",
+    logoDark: true,
     url: "https://trripah.com",
     cls: "t3",
     built: [

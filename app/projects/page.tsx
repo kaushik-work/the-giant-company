@@ -5,7 +5,8 @@ import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Projects — The Gaint Company",
-  description: "Websites, CRMs, AI products and platforms we have built.",
+  description: "Websites, CRMs, AI products and SaaS platforms built by The Gaint Company for travel, education, real estate and trade businesses.",
+  alternates: { canonical: "/projects" },
 };
 
 export default function ProjectsPage() {
