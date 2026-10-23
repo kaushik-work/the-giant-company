@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container nav">
-        <a href="#top" className="logo"><Logo size={11} /></a>
+        <a href="/" className="logo"><Logo size={11} /></a>
         <button
           className="menu-toggle"
           aria-label="Toggle menu"
@@ -19,10 +19,11 @@ export default function Header() {
           ☰
         </button>
         <nav className={`nav-links${open ? " open" : ""}`} onClick={close}>
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#process">Process</a>
-          <a href="#contact" className="btn btn-small">Get in touch</a>
+          <a href="/#moonlight">Moonlight AI</a>
+          <a href="/#services">Services</a>
+          <a href="/projects">Projects</a>
+          <a href="/#process">Process</a>
+          <a href="/#contact" className="btn btn-small">Get in touch</a>
         </nav>
       </div>
     </header>

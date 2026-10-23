@@ -1,7 +1,10 @@
 import Header from "@/components/Header";
 import CountUp from "@/components/CountUp";
 import ContactForm from "@/components/ContactForm";
-import { contact, services, projects, steps, stats } from "@/lib/data";
+import Link from "next/link";
+import ProjectCard from "@/components/ProjectCard";
+import { contact, services, steps, stats } from "@/lib/data";
+import { projects } from "@/lib/projects";
 
 const stack = [
   "TypeScript", "React", "Next.js", "Node.js", "Python", "PostgreSQL",
@@ -55,20 +58,62 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="moonlight" className="section moon">
+          <div className="container moon-grid">
+            <div>
+              <p className="eyebrow">Featured · AI product</p>
+              <h2>Meet Moonlight — Trripah&apos;s AI trip planner 🌙</h2>
+              <p className="section-sub">
+                A Claude-powered travel chatbot with a personality. She adapts to Gen Z, millennials and
+                older travellers, knows 65 destinations, plans the itinerary in conversation and hands a
+                ready lead to the sales team — without ever quoting a price.
+              </p>
+              <ul className="checklist">
+                <li>Persona-driven chat that changes tone to match the traveller</li>
+                <li>Destination knowledge injected on demand, including visa info for Indians</li>
+                <li>Inline lead capture straight into the CRM with the full itinerary</li>
+                <li>Live on the website, the CRM and the Trripah mobile app</li>
+              </ul>
+              <div className="hero-cta mt"><Link className="btn" href="/projects/moonlight-ai">Explore Moonlight</Link></div>
+            </div>
+            <div className="chat" aria-hidden="true">
+              <div className="bubble me">I want to go to Japan for 7 days</div>
+              <div className="bubble ai">Japan in October is *chef&apos;s kiss*. Are you going solo or with someone?</div>
+              <div className="bubble me">With my partner — we love food</div>
+              <div className="bubble ai">Perfect. Tokyo → Kyoto → Osaka is a foodie dream. Can I get your WhatsApp so the team can send the quote?</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="automation" className="section alt">
+          <div className="container">
+            <p className="eyebrow">Featured · Trripah CRM</p>
+            <h2>Automation that runs a travel business</h2>
+            <p className="section-sub">What we built into the Trripah CRM so agents sell instead of copy-paste.</p>
+            <div className="grid grid-3">
+              {[
+                ["📧", "Auto quote-request emails", "One click sends branded RFQs to the right destination partners, logged per trip."],
+                ["🧠", "AI quote parser", "Paste or upload a DMC quote (email, PDF, DOCX) and get a structured itinerary back."],
+                ["📄", "Automatic brochure building", "The itinerary builder produces a shareable, OTP-protected client itinerary with pricing."],
+                ["💳", "Payment gateway", "Razorpay payments with verification, partial payments and automatic status tracking."],
+                ["📣", "Campaigns & lead flow", "Bulk email campaigns, lead attribution, assignment and a daily 7 PM digest."],
+                ["📊", "Reports", "Lead, growth, payment and agent-activity reports in real time."],
+              ].map(([i, t, d]) => (
+                <article className="card" key={t}><div className="icon">{i}</div><h3>{t}</h3><p>{d}</p></article>
+              ))}
+            </div>
+            <div className="hero-cta mt"><Link className="btn" href="/projects/trripah-crm">See the CRM in detail</Link></div>
+          </div>
+        </section>
+
         <section id="work" className="section">
           <div className="container">
             <h2>Selected work</h2>
-            <p className="section-sub">Real products we&apos;ve shipped across real estate, education, trade and travel.</p>
+            <p className="section-sub">Products and platforms we&apos;ve shipped across travel, education, real estate and trade.</p>
             <div className="grid grid-3">
-              {projects.map((p) => (
-                <article className="project" key={p.name}>
-                  <div className={`thumb ${"logo" in p ? "thumb-logo" : p.cls}`}>
-                    {"logo" in p ? <img src={p.logo} alt={`${p.name} logo`} loading="lazy" /> : p.name}
-                  </div>
-                  <h3>{p.name}</h3><p>{p.text}</p><span className="tag">{p.industry}</span>
-                </article>
-              ))}
+              {projects.map((p) => <ProjectCard key={p.slug} p={p} />)}
             </div>
+            <div className="hero-cta mt"><Link className="btn btn-ghost" href="/projects">View all projects</Link></div>
           </div>
         </section>
 
