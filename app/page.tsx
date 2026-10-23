@@ -87,7 +87,7 @@ export default function Home() {
               {logoProjects.map((p) => (
                 <li key={p.slug}><img src={p.logo} alt={`${p.name} logo`} loading="lazy" /></li>
               ))}
-              <li className="text-logo">Nap Meridian Exim</li>
+              <li className="text-logo">Nap Meridian</li>
             </ul>
           </div>
         </section>
@@ -104,7 +104,8 @@ export default function Home() {
 
         {/* MOONLIGHT */}
         <section id="moonlight" className="section dark">
-          <div className="container center">
+          <div className="container">
+            <div className="moon-panel center">
             <p className="eyebrow">Featured · AI product</p>
             <h2>Meet Moonlight.<br /><em>Trripah&apos;s AI trip planner.</em></h2>
             <p className="section-sub">
@@ -128,6 +129,7 @@ export default function Home() {
               <li><strong>Lead capture</strong><span>Straight into the CRM</span></li>
               <li><strong>Everywhere</strong><span>Web, CRM and mobile app</span></li>
             </ul>
+            </div>
           </div>
         </section>
 

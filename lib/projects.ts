@@ -200,7 +200,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nap-meridian-exim",
-    name: "Nap Meridian Exim",
+    name: "Nap Meridian",
     industry: "Export & Import",
     tagline: "A business website and digital workflow system for an exporter.",
     summary: "Corporate web presence and digital workflows for an export-import business.",
