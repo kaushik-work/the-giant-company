@@ -44,7 +44,6 @@ const schema = {
       image: `${SITE_URL}/opengraph-image`,
       description: site.description,
       telephone: contact.phoneHref,
-      taxID: contact.gstin,
       address: {
         "@type": "PostalAddress",
         streetAddress: "Tejas Arcade, 527/B, Dr Rajkumar Rd, Rajajinagar",
@@ -55,7 +54,6 @@ const schema = {
       },
       geo: { "@type": "GeoCoordinates", latitude: 12.9875, longitude: 77.5523 },
       areaServed: [{ "@type": "City", name: "Bengaluru" }, { "@type": "Country", name: "India" }],
-      founder: [{ "@type": "Person", name: "Kaushik RK" }, { "@type": "Person", name: "Manoj Vijay" }],
       knowsAbout: ["Custom software development", "CRM development", "AI chatbots", "Workflow automation", "SaaS development"],
       sameAs: ["https://campusgoindia.com"],
     },

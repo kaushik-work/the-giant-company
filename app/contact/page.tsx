@@ -47,7 +47,6 @@ export default function ContactPage() {
                   <small>Visit us</small><strong>{contact.address}</strong>
                 </a>
               </div>
-              <p className="gst">GSTIN: {contact.gstin}</p>
             </div>
             <ContactForm />
           </div>

@@ -12,7 +12,6 @@ export function GET() {
 ## Contact
 - Phone / WhatsApp: ${contact.phone}
 - Address: ${contact.address}
-- GSTIN: ${contact.gstin}
 - Website: ${SITE_URL}
 
 ## Services

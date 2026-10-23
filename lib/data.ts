@@ -1,12 +1,10 @@
 export const contact = {
-  website: "https://trripah.com",
   phone: "+91 87229 36433",
   phoneHref: "+918722936433",
   whatsapp: "918722936433",
   address:
     "Tejas Arcade, 527/B, Dr Rajkumar Rd, A Block, Milk Colony, 2nd Stage, Rajajinagar, Bengaluru, Karnataka 560010",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=Tejas+Arcade+Rajajinagar+Bengaluru+560010",
-  gstin: "29AAZFT2848L1Z1",
 };
 
 export const services = [
