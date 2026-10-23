@@ -8,14 +8,13 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container nav">
-        <a href="/" className="logo" aria-label="The Gaint Company home"><Logo size={11} /></a>
+        <a href="/" className="logo" aria-label="The Gaint Company home"><Logo height={40} /></a>
         <nav className={`nav-links${open ? " open" : ""}`} aria-label="Main" onClick={() => setOpen(false)}>
-          <a href="/#moonlight">Moonlight AI</a>
           <a href="/#services">Services</a>
           <a href="/projects">Projects</a>
           <a href="/#process">Process</a>
           <a href="/#faq">FAQ</a>
-          <a href="/#contact" className="btn btn-small nav-cta">Let&apos;s talk</a>
+          <a href="/contact" className="btn btn-small nav-cta">Let&apos;s talk</a>
         </nav>
         <button className="menu-toggle" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">

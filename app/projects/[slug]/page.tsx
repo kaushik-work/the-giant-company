@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
+import Icon from "@/components/Icon";
+import ProjectCard from "@/components/ProjectCard";
 import { getProject, projects } from "@/lib/projects";
 import { SITE_URL } from "@/lib/site";
 
@@ -64,10 +66,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <p className="lead">{p.tagline}</p>
             <div className="hero-cta">
               {p.url && <a className="btn" href={p.url} target="_blank" rel="noopener">Visit {p.url.replace("https://", "")} ↗</a>}
-              <Link className="btn btn-ghost" href="/#contact">Build something similar</Link>
+              <Link className="btn btn-ghost" href="/contact">Build something similar</Link>
             </div>
-            <div className={`project-banner ${p.logo ? (p.logoDark ? "thumb-logo thumb-dark" : "thumb-logo") : p.cls}`}>
-              {p.logo ? <img src={p.logo} alt={`${p.name} logo`} /> : <span>{p.emoji} {p.name}</span>}
+            <div className={`project-banner${!p.logo || p.logoDark ? " project-banner-dark" : ""}`}>
+              {p.logo ? <img src={p.logo} alt={`${p.name} logo`} /> : <div className="pcard-icon big"><Icon name={p.icon ?? "code"} size={56} /></div>}
             </div>
           </div>
         </section>
@@ -97,15 +99,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <section className="section">
           <div className="container">
             <h2>More projects</h2>
-            <div className="grid grid-3 mt">
-              {others.map((o) => (
-                <Link key={o.slug} href={`/projects/${o.slug}`} className="project">
-                  <div className={`thumb ${o.logo ? (o.logoDark ? "thumb-logo thumb-dark" : "thumb-logo") : o.cls}`}>
-                    {o.logo ? <img src={o.logo} alt="" /> : <span>{o.emoji} {o.name}</span>}
-                  </div>
-                  <h3>{o.name}</h3><p>{o.summary}</p>
-                </Link>
-              ))}
+            <div className="bento mt">
+              {others.map((o) => <ProjectCard key={o.slug} p={o} span={2} />)}
             </div>
           </div>
         </section>

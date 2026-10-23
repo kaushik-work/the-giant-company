@@ -5,16 +5,17 @@ export const contact = {
   whatsapp: "918722936433",
   address:
     "Tejas Arcade, 527/B, Dr Rajkumar Rd, A Block, Milk Colony, 2nd Stage, Rajajinagar, Bengaluru, Karnataka 560010",
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=Tejas+Arcade+Rajajinagar+Bengaluru+560010",
   gstin: "29AAZFT2848L1Z1",
 };
 
 export const services = [
-  { icon: "💻", title: "Custom Software Development", text: "Tailor-made software built around how your business actually operates." },
-  { icon: "📇", title: "CRM Development", text: "Sales, quotation and lead-management CRMs that your team will actually use." },
-  { icon: "🌐", title: "Web Development", text: "Fast, SEO-friendly business websites and lead-generation platforms." },
-  { icon: "⚙️", title: "Workflow Automation", text: "Replace spreadsheets and manual hand-offs with automated digital workflows." },
-  { icon: "🚀", title: "SaaS Product Development", text: "From MVP to multi-tenant SaaS, designed to scale with your users." },
-  { icon: "🤖", title: "AI & Intelligent Automation", text: "Chatbots, document processing and AI assistants wired into your operations." },
+  { icon: "code", title: "Custom Software Development", text: "Tailor-made software built around how your business actually operates." },
+  { icon: "crm", title: "CRM Development", text: "Sales, quotation and lead-management CRMs that your team will actually use." },
+  { icon: "globe", title: "Web Development", text: "Fast, SEO-friendly business websites and lead-generation platforms." },
+  { icon: "workflow", title: "Workflow Automation", text: "Replace spreadsheets and manual hand-offs with automated digital workflows." },
+  { icon: "rocket", title: "SaaS Product Development", text: "From MVP to multi-tenant SaaS, designed to scale with your users." },
+  { icon: "bot", title: "AI & Intelligent Automation", text: "Chatbots, document processing and AI assistants wired into your operations." },
 ];
 
 export const steps = [

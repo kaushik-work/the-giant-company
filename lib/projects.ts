@@ -8,7 +8,7 @@ export type Project = {
   logo?: string;
   logoDark?: boolean;
   url?: string;
-  emoji?: string;
+  icon?: string;
   cls: string;
   featured?: boolean;
   built: string[];
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     summary: "Trripah's AI trip planner: chats like a well-travelled friend, plans the itinerary, and hands a ready lead to the sales team.",
     overview:
       "Moonlight is the AI brain behind Trripah's trip-planning chat. She is written as a 28-year-old who has travelled the world and adapts her tone to the traveller — casual and punchy for Gen Z, structured for millennials, warm and clear for older travellers. Her job is to talk a visitor through destination, dates, group and style until the itinerary is final, then capture contact details so the ground team can send a quote. She never quotes prices — pricing stays with people.",
-    emoji: "🌙",
+    icon: "moon",
     cls: "t1",
     featured: true,
     built: [
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     summary: "Group trips, Moonlight AI concierge, flight fares and trips in one app.",
     overview:
       "A Flutter app for Android and iOS with a five-tab shell — Home, Moonlight, Flights, Trips and Profile. It runs on live data: group trips and leads against the Trripah CRM, the Moonlight chat on its own backend, and real nightly-scraped fares from Flight Klub for the Flight Finder.",
-    emoji: "📱",
+    icon: "phone",
     cls: "t2",
     built: [
       "Flutter app with go_router navigation and a polished animated UI",
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     summary: "Corporate web presence and digital workflows for an export-import business.",
     overview:
       "A business website paired with a digital workflow system that moves the company's export-import operations off manual processes.",
-    emoji: "🚢",
+    icon: "ship",
     cls: "t3",
     built: ["Corporate website", "Digital workflow system for day-to-day export-import operations"],
     features: [{ title: "Workflow digitisation", text: "Replaces manual tracking with a shared digital process." }],

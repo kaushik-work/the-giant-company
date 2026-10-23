@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectBento from "@/components/ProjectBento";
 import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function ProjectsPage() {
           <p className="eyebrow">Our work</p>
           <h1 className="page-title">Projects we&apos;ve shipped</h1>
           <p className="section-sub">From AI chatbots to CRMs, SaaS products and business websites — across travel, education, real estate and trade.</p>
-          <div className="grid grid-3">{projects.map((p) => <ProjectCard key={p.slug} p={p} />)}</div>
+          <ProjectBento projects={projects} />
         </div>
       </main>
     </>

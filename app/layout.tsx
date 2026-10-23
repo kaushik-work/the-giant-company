@@ -57,7 +57,7 @@ const schema = {
       areaServed: [{ "@type": "City", name: "Bengaluru" }, { "@type": "Country", name: "India" }],
       founder: [{ "@type": "Person", name: "Kaushik RK" }, { "@type": "Person", name: "Manoj Vijay" }],
       knowsAbout: ["Custom software development", "CRM development", "AI chatbots", "Workflow automation", "SaaS development"],
-      sameAs: [contact.website, "https://campusgoindia.com"],
+      sameAs: ["https://campusgoindia.com"],
     },
     {
       "@type": "WebSite",

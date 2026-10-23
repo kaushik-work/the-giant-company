@@ -1,24 +1,27 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import CountUp from "@/components/CountUp";
-import ContactForm from "@/components/ContactForm";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectBento from "@/components/ProjectBento";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
+import Icon from "@/components/Icon";
 import { contact, services, steps } from "@/lib/data";
 import { projects } from "@/lib/projects";
 import { SITE_URL } from "@/lib/site";
 
 const stack = ["TypeScript", "React", "Next.js", "Node.js", "Java / Spring Boot", "Flutter", "Python", "PostgreSQL", "MongoDB", "Claude API", "Razorpay", "Docker", "AWS", "Vercel"];
 
-const automations: [string, string, string][] = [
-  ["📧", "Auto quote-request emails", "One click sends branded RFQs to the right destination partners, logged per trip."],
-  ["🧠", "AI quote parser", "Paste or upload a supplier quote (email, PDF, DOCX) and get a structured itinerary back."],
-  ["📄", "Automatic brochure building", "The itinerary builder produces a shareable, OTP-protected client itinerary with pricing."],
-  ["💳", "Payment gateway", "Razorpay payments with verification, partial payments and automatic status tracking."],
-  ["📣", "Campaigns & lead flow", "Bulk email campaigns, lead attribution, assignment and a daily 7 PM digest."],
-  ["📊", "Reports", "Lead, growth, payment and agent-activity reports in real time."],
+const automations: { icon: string; title: string; text: string; span: number; visual?: "mail" | "pay" | "chart" }[] = [
+  { icon: "mail", title: "Auto quote-request emails", text: "One click sends branded RFQs to the right destination partners, logged per trip.", span: 4, visual: "mail" },
+  { icon: "brain", title: "AI quote parser", text: "Paste or upload a supplier quote (email, PDF, DOCX) and get a structured itinerary back.", span: 2 },
+  { icon: "doc", title: "Automatic brochure building", text: "The itinerary builder produces a shareable, OTP-protected client itinerary with pricing.", span: 2 },
+  { icon: "card", title: "Payment gateway", text: "Razorpay payments with verification, partial payments and automatic status tracking.", span: 4, visual: "pay" },
+  { icon: "megaphone", title: "Campaigns & lead flow", text: "Bulk email campaigns, lead attribution, assignment and a daily 7 PM digest.", span: 3 },
+  { icon: "chart", title: "Reports", text: "Lead, growth, payment and agent-activity reports in real time.", span: 3, visual: "chart" },
 ];
+
+const serviceSpans = [4, 2, 2, 2, 2, 6];
+const darkServices = new Set([0, 5]);
 
 const logoProjects = projects.filter((p) => p.logo && !p.logoDark);
 
@@ -51,7 +54,7 @@ export default function Home() {
               that has shipped real products for travel, education, real estate and trade.
             </p>
             <div className="hero-cta">
-              <a href="#contact" className="btn btn-red">Start a project</a>
+              <a href="/contact" className="btn btn-red">Start a project</a>
               <Link href="/projects" className="link-arrow">See our work</Link>
             </div>
           </div>
@@ -139,10 +142,24 @@ export default function Home() {
             <p className="eyebrow">What we do</p>
             <h2>End-to-end engineering, <em>one team</em></h2>
             <p className="section-sub">Delivered as a dedicated team or a fixed-scope project.</p>
-            <div className="grid grid-3">
-              {services.map((s) => (
-                <article className="card" key={s.title}>
-                  <div className="icon">{s.icon}</div><h3>{s.title}</h3><p>{s.text}</p>
+            <div className="bento">
+              {services.map((sv, i) => (
+                <article className={`tile${darkServices.has(i) ? " tile-dark" : ""}`} style={{ "--span": serviceSpans[i] } as React.CSSProperties} key={sv.title}>
+                  <div className="icon-chip"><Icon name={sv.icon} /></div>
+                  <h3>{sv.title}</h3>
+                  <p>{sv.text}</p>
+                  {i === 0 && (
+                    <div className="mini-window" aria-hidden="true">
+                      <i /><i /><i />
+                      <div className="lines"><b style={{ width: "62%" }} /><b style={{ width: "84%" }} /><b style={{ width: "48%" }} /><b style={{ width: "70%" }} /></div>
+                    </div>
+                  )}
+                  {i === 5 && (
+                    <div className="mini-chat" aria-hidden="true">
+                      <span className="bubble me">Summarise this month&apos;s leads</span>
+                      <span className="bubble ai">42 new leads, 11 quoted. Want the top sources?</span>
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
@@ -156,9 +173,24 @@ export default function Home() {
             <p className="eyebrow">Featured · Trripah CRM</p>
             <h2>Automation that runs a <em>travel business</em></h2>
             <p className="section-sub">What we built into the Trripah CRM so agents sell instead of copy-paste.</p>
-            <div className="grid grid-3">
-              {automations.map(([i, t, d]) => (
-                <article className="card" key={t}><div className="icon">{i}</div><h3>{t}</h3><p>{d}</p></article>
+            <div className="bento">
+              {automations.map((a) => (
+                <article className="tile" style={{ "--span": a.span } as React.CSSProperties} key={a.title}>
+                  <div className="icon-chip"><Icon name={a.icon} /></div>
+                  <h3>{a.title}</h3>
+                  <p>{a.text}</p>
+                  {a.visual === "mail" && (
+                    <ul className="mini-flow" aria-hidden="true">
+                      <li>Bali · 3 DMC partners</li><li>RFQ sent</li><li>Quote received</li>
+                    </ul>
+                  )}
+                  {a.visual === "pay" && (
+                    <div className="mini-pay" aria-hidden="true"><span>Razorpay</span><b>₹ 48,500</b><em>Paid ✓</em></div>
+                  )}
+                  {a.visual === "chart" && (
+                    <div className="mini-bars" aria-hidden="true">{[40, 62, 48, 80, 66, 94].map((h, i) => <i key={i} style={{ height: `${h}%` }} />)}</div>
+                  )}
+                </article>
               ))}
             </div>
             <div className="hero-cta mt"><Link className="link-arrow" href="/projects/trripah-crm">See the CRM in detail</Link></div>
@@ -171,9 +203,7 @@ export default function Home() {
             <p className="eyebrow">Selected work</p>
             <h2>Products and platforms we&apos;ve <em>shipped</em></h2>
             <p className="section-sub">Across travel, education, real estate and trade.</p>
-            <div className="grid grid-3">
-              {projects.map((p) => <ProjectCard key={p.slug} p={p} />)}
-            </div>
+            <ProjectBento projects={projects} />
             <div className="hero-cta mt"><Link className="link-arrow" href="/projects">View all projects</Link></div>
           </div>
         </section>
@@ -200,21 +230,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CONTACT */}
-        <section id="contact" className="section cta-band">
-          <div className="container contact">
-            <div>
-              <h2>Let&apos;s build something <em>big</em>.</h2>
-              <p className="section-sub">Tell us about your project and we&apos;ll get back to you within one business day.</p>
-              <p className="contact-info">
-                <a href={`tel:${contact.phoneHref}`}>{contact.phone}</a> ·{" "}
-                <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener">WhatsApp</a><br />
-                {contact.address}<br />
-                <a href={contact.website} target="_blank" rel="noopener">trripah.com</a><br />
-                GSTIN: {contact.gstin}
-              </p>
+        {/* CONTACT INFO */}
+        <section id="contact" className="section">
+          <div className="container head-center">
+            <p className="eyebrow">Get in touch</p>
+            <h2>Let&apos;s build something <em>big</em>.</h2>
+            <p className="section-sub">Tell us about your project and we&apos;ll get back to you within one business day.</p>
+            <div className="info-grid">
+              <a className="info-card" href={`tel:${contact.phoneHref}`}>
+                <span className="icon-chip"><Icon name="call" /></span>
+                <small>Call us</small><strong>{contact.phone}</strong>
+              </a>
+              <a className="info-card" href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener">
+                <span className="icon-chip"><Icon name="chat" /></span>
+                <small>WhatsApp</small><strong>Message us</strong>
+              </a>
+              <a className="info-card" href={contact.mapUrl} target="_blank" rel="noopener">
+                <span className="icon-chip"><Icon name="pin" /></span>
+                <small>Visit us</small><strong>Rajajinagar, Bengaluru</strong>
+              </a>
             </div>
-            <ContactForm />
+            <div className="hero-cta mt">
+              <Link className="btn btn-red" href="/contact">Send an enquiry</Link>
+              <Link className="link-arrow" href="/contact">Open contact page</Link>
+            </div>
           </div>
         </section>
       </main>
