@@ -767,3 +767,9 @@ em { letter-spacing: .005em; }
 .pcard-media img, .trust-cell img { filter: none; }
 .trust-card { box-shadow: var(--shadow-1); }
 .hero-tile .float-card { animation: none; }
+
+/* Clients strip: no card, full-bleed carousel */
+.trusted { padding: 56px 0 8px; }
+.trust-card { border: 0; box-shadow: none; background: none; }
+.trust-marquee { width: 100%; margin-top: 12px; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.trust-track { animation-duration: 40s; }

@@ -20,15 +20,12 @@ export default function TrustedStrip() {
   return (
     <section className="trusted" aria-label="Businesses we have built for">
       <div className="container">
-        <div className="trust-card">
-          <p className="trust-label"><i className="dot" /> Trusted by businesses across travel, education, real estate &amp; trade</p>
-          <div className="trust-marquee">
-            <ul className="trust-track">
-              {items.map((it) => <Cell key={it.key} it={it} />)}
-              {items.map((it) => <Cell key={`${it.key}-2`} it={it} />)}
-            </ul>
-          </div>
-        </div>
+        <p className="trust-label"><i className="dot" /> Trusted by businesses across travel, education, real estate &amp; trade</p>
+      </div>
+      <div className="trust-marquee">
+        <ul className="trust-track">
+          {[...items, ...items, ...items, ...items].map((it, i) => <Cell key={`${it.key}-${i}`} it={it} />)}
+        </ul>
       </div>
     </section>
   );
