@@ -14,8 +14,3 @@ export const steps = [
   { n: "04", title: "Launch & Support", text: "Release, monitor, and iterate on real user data.", details: ["Production deployment and domain setup", "Monitoring, backups and security updates", "Training and handover documentation", "Ongoing improvements and support"] },
 ];
 
-export const stats = [
-  { value: 8, label: "Products & projects" },
-  { value: 5, label: "Industries served" },
-  { value: 100, label: "% custom-built" },
-];

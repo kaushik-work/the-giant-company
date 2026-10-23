@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Header from "@/components/Header";
-import CountUp from "@/components/CountUp";
 import ProjectBento from "@/components/ProjectBento";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
@@ -83,16 +82,6 @@ export default function Home() {
 
         {/* TRUSTED */}
         <TrustedStrip />
-
-        {/* STATS */}
-        <section className="stats-band">
-          <div className="container stat-cards glass-stats">
-            <div><CountUp value={8} /><span>Products &amp; projects shipped</span></div>
-            <div className="hot"><CountUp value={65} /><span>Destinations powering our AI planner</span></div>
-            <div><CountUp value={5} /><span>Industries served</span></div>
-            <div><CountUp value={100} suffix="%" /><span>Custom-built, no templates</span></div>
-          </div>
-        </section>
 
         {/* MOONLIGHT */}
         <section id="moonlight" className="section dark">
