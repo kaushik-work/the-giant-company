@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 
 const themes = [
-  { id: "sky", label: "Sky", color: "linear-gradient(135deg,#2563ff,#8b5cf6)" },
-  { id: "mint", label: "Mint", color: "linear-gradient(135deg,#12b76a,#06b6d4)" },
-  { id: "sunny", label: "Sunny", color: "linear-gradient(135deg,#ff7a00,#ff3d81)" },
+  { id: "noir", label: "Black & red", color: "linear-gradient(135deg,#0b0b0f 45%,#ff3131 55%)" },
+  { id: "mint", label: "Mint", color: "linear-gradient(135deg,#0fa968,#84cc16)" },
+  { id: "sunny", label: "Sunny", color: "linear-gradient(135deg,#f26b00,#ffb000)" },
 ];
 
 // Temporary picker for choosing the final palette. Remove once a theme is chosen.
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState("sky");
-  useEffect(() => setTheme(document.documentElement.dataset.theme || "sky"), []);
+  const [theme, setTheme] = useState("noir");
+  useEffect(() => setTheme(document.documentElement.dataset.theme || "noir"), []);
   const pick = (id: string) => {
     setTheme(id);
     document.documentElement.dataset.theme = id;

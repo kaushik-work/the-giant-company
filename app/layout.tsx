@@ -71,7 +71,7 @@ const schema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${serif.variable}`} data-theme="sky" suppressHydrationWarning>
+    <html lang="en-IN" className={`${inter.variable} ${serif.variable}`} data-theme="noir" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

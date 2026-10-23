@@ -1,7 +1,7 @@
 /* ===== Theme tokens (switch with data-theme on <html>) ===== */
-:root, [data-theme="sky"] { --accent: #2563ff; --accent-rgb: 37,99,255; --accent-2: #8b5cf6; --accent-light: #5b8cff; --accent-deep: #1c3fd6; --accent-hover: #1a4fe0; --accent-soft: #b9ccff; --accent-tint: #eef3ff; --dark: #1a2a9e; --sun: #ffc83d; --sun-rgb: 255,200,61; }
-[data-theme="mint"] { --accent: #12b76a; --accent-rgb: 18,183,106; --accent-2: #06b6d4; --accent-light: #34d399; --accent-deep: #067a46; --accent-hover: #0e9f5c; --accent-soft: #a7f0cd; --accent-tint: #ecfdf5; --dark: #08704a; --sun: #ffe45c; --sun-rgb: 255,228,92; }
-[data-theme="sunny"] { --accent: #ff7a00; --accent-rgb: 255,122,0; --accent-2: #ff3d81; --accent-light: #ffa24d; --accent-deep: #c24e00; --accent-hover: #e66d00; --accent-soft: #ffd2a8; --accent-tint: #fff4e8; --dark: #6b1fa3; --sun: #ffd23f; --sun-rgb: 255,210,63; }
+[data-theme="noir"], :root { --accent: #ff3131; --accent-rgb: 255,49,49; --accent-2: #ff6a3d; --accent-light: #ff5a5a; --accent-deep: #8a0000; --accent-hover: #e82424; --accent-soft: #ffb3b3; --accent-tint: #fff1f1; --dark: #0b0b0f; --sun: #ffc83d; --sun-rgb: 255,200,61; }
+[data-theme="mint"] { --accent: #0fa968; --accent-rgb: 15,169,104; --accent-2: #84cc16; --accent-light: #34d399; --accent-deep: #067a46; --accent-hover: #0b9459; --accent-soft: #b5f2d3; --accent-tint: #ecfdf5; --dark: #0a8f55; --sun: #ffe45c; --sun-rgb: 255,228,92; }
+[data-theme="sunny"] { --accent: #f26b00; --accent-rgb: 242,107,0; --accent-2: #ffb000; --accent-light: #ffa24d; --accent-deep: #c24e00; --accent-hover: #d95f00; --accent-soft: #ffd9b3; --accent-tint: #fff4e8; --dark: #e8590c; --sun: #ffd23f; --sun-rgb: 255,210,63; }
 :root {
   --bg: #ffffff;
   --bg-alt: #f6f5f3;
@@ -601,7 +601,7 @@ a.tile { color: inherit; }
 em { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .06em; }
 .moon-panel em, .section.dark .moon-panel em { background: linear-gradient(90deg, #fff, var(--accent-soft)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero { background: radial-gradient(ellipse 60% 50% at 85% 0%, rgba(var(--accent-rgb), .12), transparent 70%), radial-gradient(ellipse 50% 45% at 5% 10%, rgba(var(--sun-rgb), .22), transparent 70%), #fff; }
-.hero-tile::before { background: var(--sun) !important; }
+.hero-tile::before { background: var(--accent) !important; }
 .hero-tile::after { background: var(--accent-2) !important; }
 .dot { background: var(--sun); box-shadow: 0 0 0 4px rgba(var(--sun-rgb), .35); }
 .btn-red { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-color: transparent; }
@@ -611,7 +611,7 @@ em { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit
 .checklist li::before { background: rgba(var(--accent-rgb), .12); }
 .eyebrow { color: var(--accent); }
 .tile::before, .card::before { background: radial-gradient(circle, rgba(var(--sun-rgb), .35), transparent 68%); }
-.pcard-media { background: radial-gradient(circle at 50% 120%, rgba(var(--accent-rgb), .12), transparent 60%), linear-gradient(#fff, #fafbff); }
+.pcard-media { background: radial-gradient(circle at 50% 120%, rgba(var(--accent-rgb), .12), transparent 60%), linear-gradient(#fff, #fafaf7); }
 .stat-cards .hot { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
 
 /* ================= Theme switcher ================= */
@@ -619,3 +619,18 @@ em { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit
 .theme-switch button { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--border); cursor: pointer; }
 .theme-switch button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--text); }
 @media (max-width: 760px) { .theme-switch { bottom: 82px; } }
+
+/* ===== Black & red theme: black panels with red highlights ===== */
+[data-theme="noir"] .hero-tile,
+[data-theme="noir"] .moon-panel,
+[data-theme="noir"] .glass-stats,
+[data-theme="noir"] .tile-dark,
+[data-theme="noir"] .pcard-dark .pcard-media,
+[data-theme="noir"] .project-banner-dark {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255,49,49,.62) 0, transparent 34%),
+    radial-gradient(circle at 100% 100%, rgba(255,49,49,.38) 0, transparent 36%),
+    #0b0b0f !important;
+}
+[data-theme="noir"] .hero-tile::before, [data-theme="noir"] .hero-tile::after { opacity: .28; }
+[data-theme="noir"] .glass-stats .hot, [data-theme="noir"] .stat-cards .hot { background: linear-gradient(135deg, #ff3131, #ff6a3d); }

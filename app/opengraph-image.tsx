@@ -9,7 +9,7 @@ export default function OG() {
     (
       <div style={{ width: "100%", height: "100%", background: "#fff", display: "flex", flexDirection: "column", justifyContent: "center", padding: 80, fontFamily: "sans-serif" }}>
         <div style={{ display: "flex", fontSize: 40, fontWeight: 900, letterSpacing: -1 }}>
-          <span>THE&nbsp;</span><span style={{ color: "#2563ff" }}>GAINT</span><span>&nbsp;COMPANY</span>
+          <span>THE&nbsp;</span><span style={{ color: "#ff3131" }}>GAINT</span><span>&nbsp;COMPANY</span>
         </div>
         <div style={{ fontSize: 84, fontWeight: 800, lineHeight: 1.05, marginTop: 40, letterSpacing: -3 }}>
           Software that automates your business.
