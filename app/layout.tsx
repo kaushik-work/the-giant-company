@@ -3,6 +3,7 @@ import { Inter, Instrument_Serif } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import MobileBar from "@/components/MobileBar";
 import Footer from "@/components/Footer";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { contact } from "@/lib/data";
 import { site, SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -70,12 +71,20 @@ const schema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${serif.variable}`}>
+    <html lang="en-IN" className={`${inter.variable} ${serif.variable}`} data-theme="sky" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme");if(t){document.documentElement.dataset.theme=t}}catch(e){}`,
+          }}
+        />
+      </head>
       <body>
         <JsonLd data={schema} />
         {children}
         <Footer />
         <MobileBar />
+        <ThemeSwitcher />
       </body>
     </html>
   );
