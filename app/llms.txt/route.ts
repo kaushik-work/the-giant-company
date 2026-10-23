@@ -1,5 +1,6 @@
 import { projects } from "@/lib/projects";
-import { contact, services } from "@/lib/data";
+import { contact } from "@/lib/data";
+import { services } from "@/lib/services";
 import { faqs, site, SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -15,7 +16,7 @@ export function GET() {
 - Website: ${SITE_URL}
 
 ## Services
-${services.map((s) => `- ${s.title}: ${s.text}`).join("\n")}
+${services.map((s) => `- [${s.title}](${SITE_URL}/services/${s.slug}): ${s.text}`).join("\n")}
 
 ## Projects
 ${projects.map((p) => `- [${p.name}](${SITE_URL}/projects/${p.slug}) (${p.industry}): ${p.summary}`).join("\n")}

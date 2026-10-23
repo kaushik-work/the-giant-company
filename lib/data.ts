@@ -7,20 +7,11 @@ export const contact = {
   mapUrl: "https://www.google.com/maps/search/?api=1&query=Tejas+Arcade+Rajajinagar+Bengaluru+560010",
 };
 
-export const services = [
-  { icon: "code", title: "Custom Software Development", text: "Tailor-made software built around how your business actually operates." },
-  { icon: "crm", title: "CRM Development", text: "Sales, quotation and lead-management CRMs that your team will actually use." },
-  { icon: "globe", title: "Web Development", text: "Fast, SEO-friendly business websites and lead-generation platforms." },
-  { icon: "workflow", title: "Workflow Automation", text: "Replace spreadsheets and manual hand-offs with automated digital workflows." },
-  { icon: "rocket", title: "SaaS Product Development", text: "From MVP to multi-tenant SaaS, designed to scale with your users." },
-  { icon: "bot", title: "AI & Intelligent Automation", text: "Chatbots, document processing and AI assistants wired into your operations." },
-];
-
 export const steps = [
-  { n: "01", title: "Discover", text: "Workshops to align on goals, users and scope." },
-  { n: "02", title: "Design", text: "Prototypes and architecture you can react to early." },
-  { n: "03", title: "Build", text: "Iterative sprints with demos and transparent progress." },
-  { n: "04", title: "Launch & Support", text: "Release, monitor, and iterate on real user data." },
+  { n: "01", title: "Discover", text: "Workshops to align on goals, users and scope.", details: ["Stakeholder and user interviews", "Map the current process and where it breaks", "Define scope, priorities and success measures", "Written proposal with timeline and cost"] },
+  { n: "02", title: "Design", text: "Prototypes and architecture you can react to early.", details: ["User flows and clickable prototypes", "System architecture and data model", "Integrations plan (payments, email, WhatsApp, AI)", "Sign-off before build starts"] },
+  { n: "03", title: "Build", text: "Iterative sprints with demos and transparent progress.", details: ["Short sprints, each ending in a working demo", "Shared progress board you can check any time", "Code review, automated checks and staging environment", "Your feedback folded in every sprint"] },
+  { n: "04", title: "Launch & Support", text: "Release, monitor, and iterate on real user data.", details: ["Production deployment and domain setup", "Monitoring, backups and security updates", "Training and handover documentation", "Ongoing improvements and support"] },
 ];
 
 export const stats = [

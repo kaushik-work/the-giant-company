@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import { contact, services } from "@/lib/data";
+import { contact } from "@/lib/data";
+import { services } from "@/lib/services";
 import { projects } from "@/lib/projects";
 
 export default function Footer() {
@@ -17,7 +18,7 @@ export default function Footer() {
         </div>
         <nav aria-label="Services">
           <h4>Services</h4>
-          <ul>{services.map((s) => <li key={s.title}><Link href="/#services">{s.title}</Link></li>)}</ul>
+          <ul>{services.map((s) => <li key={s.title}><Link href={`/services/${s.slug}`}>{s.title}</Link></li>)}</ul>
         </nav>
         <nav aria-label="Projects">
           <h4>Projects</h4>
@@ -27,16 +28,23 @@ export default function Footer() {
           <h4>Company</h4>
           <ul>
             <li><Link href="/">Home</Link></li>
-            <li><Link href="/#moonlight">Moonlight AI</Link></li>
+            <li><Link href="/services">All services</Link></li>
+            <li><Link href="/projects/moonlight-ai">Moonlight AI</Link></li>
             <li><Link href="/projects">All projects</Link></li>
-            <li><Link href="/#process">How we work</Link></li>
-            <li><Link href="/#faq">FAQ</Link></li>
+            <li><Link href="/process">How we work</Link></li>
+            <li><Link href="/faq">FAQ</Link></li>
             <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link href="/terms-and-conditions">Terms &amp; Conditions</Link></li>
           </ul>
         </nav>
       </div>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} The Gaint Company. All rights reserved.</span>
+        <span className="legal-links">
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+        </span>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>

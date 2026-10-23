@@ -10,10 +10,10 @@ export default function Header() {
       <div className="container nav">
         <a href="/" className="logo" aria-label="The Gaint Company home"><Logo height={40} /></a>
         <nav className={`nav-links${open ? " open" : ""}`} aria-label="Main" onClick={() => setOpen(false)}>
-          <a href="/#services">Services</a>
+          <a href="/services">Services</a>
           <a href="/projects">Projects</a>
-          <a href="/#process">Process</a>
-          <a href="/#faq">FAQ</a>
+          <a href="/process">Process</a>
+          <a href="/faq">FAQ</a>
           <a href="/contact" className="btn btn-small nav-cta">Let&apos;s talk</a>
         </nav>
         <button className="menu-toggle" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>

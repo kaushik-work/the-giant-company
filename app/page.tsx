@@ -5,7 +5,9 @@ import ProjectBento from "@/components/ProjectBento";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import Icon from "@/components/Icon";
-import { contact, services, steps } from "@/lib/data";
+import TrustedStrip from "@/components/TrustedStrip";
+import ServicesBento from "@/components/ServicesBento";
+import { contact, steps } from "@/lib/data";
 import { projects } from "@/lib/projects";
 import { SITE_URL } from "@/lib/site";
 
@@ -20,10 +22,7 @@ const automations: { icon: string; title: string; text: string; span: number; vi
   { icon: "chart", title: "Reports", text: "Lead, growth, payment and agent-activity reports in real time.", span: 3, visual: "chart" },
 ];
 
-const serviceSpans = [4, 2, 2, 2, 2, 6];
-const darkServices = new Set([0, 5]);
 
-const logoProjects = projects.filter((p) => p.logo && !p.logoDark);
 
 export default function Home() {
   const itemList = {
@@ -83,17 +82,7 @@ export default function Home() {
         </section>
 
         {/* TRUSTED */}
-        <section className="trusted" aria-label="Brands we have built for">
-          <div className="container">
-            <p>Trusted by businesses across travel, education, real estate &amp; trade</p>
-            <ul>
-              {logoProjects.map((p) => (
-                <li key={p.slug}><img src={p.logo} alt={`${p.name} logo`} loading="lazy" /></li>
-              ))}
-              <li className="text-logo">Nap Meridian</li>
-            </ul>
-          </div>
-        </section>
+        <TrustedStrip />
 
         {/* STATS */}
         <section className="stats-band">
@@ -142,28 +131,9 @@ export default function Home() {
             <p className="eyebrow">What we do</p>
             <h2>End-to-end engineering, <em>one team</em></h2>
             <p className="section-sub">Delivered as a dedicated team or a fixed-scope project.</p>
-            <div className="bento">
-              {services.map((sv, i) => (
-                <article className={`tile${darkServices.has(i) ? " tile-dark" : ""}`} style={{ "--span": serviceSpans[i] } as React.CSSProperties} key={sv.title}>
-                  <div className="icon-chip"><Icon name={sv.icon} /></div>
-                  <h3>{sv.title}</h3>
-                  <p>{sv.text}</p>
-                  {i === 0 && (
-                    <div className="mini-window" aria-hidden="true">
-                      <i /><i /><i />
-                      <div className="lines"><b style={{ width: "62%" }} /><b style={{ width: "84%" }} /><b style={{ width: "48%" }} /><b style={{ width: "70%" }} /></div>
-                    </div>
-                  )}
-                  {i === 5 && (
-                    <div className="mini-chat" aria-hidden="true">
-                      <span className="bubble me">Summarise this month&apos;s leads</span>
-                      <span className="bubble ai">42 new leads, 11 quoted. Want the top sources?</span>
-                    </div>
-                  )}
-                </article>
-              ))}
-            </div>
+            <ServicesBento />
             <ul className="chips">{stack.map((t) => <li key={t}>{t}</li>)}</ul>
+            <div className="hero-cta mt"><Link className="link-arrow" href="/services">All services</Link></div>
           </div>
         </section>
 
@@ -218,6 +188,7 @@ export default function Home() {
                 <li key={s.n}><span>{s.n}</span><h3>{s.title}</h3><p>{s.text}</p></li>
               ))}
             </ol>
+            <div className="hero-cta mt"><Link className="link-arrow" href="/process">How we work in detail</Link></div>
           </div>
         </section>
 
@@ -226,7 +197,8 @@ export default function Home() {
           <div className="container narrow head-center">
             <p className="eyebrow">FAQ</p>
             <h2>Questions, <em>answered</em></h2>
-            <Faq />
+            <Faq limit={4} schema={false} />
+            <div className="hero-cta mt"><Link className="link-arrow" href="/faq">See all questions</Link></div>
           </div>
         </section>
 
