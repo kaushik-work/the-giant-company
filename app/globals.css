@@ -634,3 +634,73 @@ em { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit
 }
 [data-theme="noir"] .hero-tile::before, [data-theme="noir"] .hero-tile::after { opacity: .28; }
 [data-theme="noir"] .glass-stats .hot, [data-theme="noir"] .stat-cards .hot { background: linear-gradient(135deg, #ff3131, #ff6a3d); }
+
+/* ================= Shadow play ================= */
+:root {
+  --shadow-1: 0 1px 1px rgba(14,14,18,.04), 0 2px 4px rgba(14,14,18,.04), 0 8px 16px rgba(14,14,18,.05), 0 24px 48px -12px rgba(14,14,18,.14);
+  --shadow-2: 0 2px 2px rgba(14,14,18,.05), 0 6px 12px rgba(14,14,18,.06), 0 18px 36px rgba(14,14,18,.1), 0 44px 80px -20px rgba(14,14,18,.22);
+  --glow: 0 0 0 1px rgba(var(--accent-rgb), .25), 0 18px 50px -12px rgba(var(--accent-rgb), .45);
+}
+
+/* layered, depth-building shadows on light tiles */
+.tile, .card, .info-card, .steps li, .process-step, .trust-card, .pcard, .faq details { box-shadow: var(--shadow-1); }
+.tile:hover, .card:hover, .info-card:hover, .pcard:hover { box-shadow: var(--shadow-2), var(--glow); }
+
+/* dark panels float above the page with a coloured glow and a grounded contact shadow */
+.hero-tile, .moon-panel, .glass-stats, .tile-dark, .project-banner-dark {
+  box-shadow:
+    0 2px 2px rgba(0,0,0,.2),
+    0 12px 24px rgba(0,0,0,.2),
+    0 40px 70px -18px rgba(0,0,0,.45),
+    0 60px 110px -30px rgba(var(--accent-rgb), .55),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+.hero-tile, .moon-panel, .glass-stats { position: relative; }
+.hero-tile::selection { background: transparent; }
+
+/* glass cards: deeper drop shadow + bright top edge + faint bottom shade */
+.hero-tile .float-card, .moon-panel .chat, .pillars li, .glass-stats > div {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -14px 24px -14px rgba(0,0,0,.35),
+    0 10px 20px -6px rgba(0,0,0,.35),
+    0 32px 56px -16px rgba(0,0,0,.5);
+}
+.hero-tile .float-card { animation: float 7s ease-in-out infinite; }
+.hero-tile .fc-flow { animation-delay: -2.5s; }
+.hero-tile .fc-stat { animation-delay: -4.5s; }
+
+/* buttons: coloured glow beneath, pressed shadow on click */
+.btn-red, .btn-small { box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 8px 18px -6px rgba(var(--accent-rgb), .6), 0 18px 34px -14px rgba(var(--accent-rgb), .6); }
+.btn-red:hover, .btn-small:hover { box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 12px 26px -6px rgba(var(--accent-rgb), .75), 0 28px 50px -16px rgba(var(--accent-rgb), .7); }
+.btn:active { transform: translateY(0) scale(.98); box-shadow: 0 2px 6px rgba(var(--accent-rgb), .4); }
+.moon-panel .btn-red { box-shadow: 0 10px 30px -6px rgba(255,255,255,.35); }
+
+/* icon chips: gem-like highlights and a lifted shadow */
+.icon-chip { box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -6px 10px -4px rgba(0,0,0,.25), 0 8px 14px -4px rgba(var(--accent-rgb), .55), 0 20px 28px -10px rgba(var(--accent-rgb), .5); }
+
+/* logos and images cast soft shadows */
+.pcard-media img { filter: drop-shadow(0 4px 6px rgba(14,14,18,.1)) drop-shadow(0 18px 24px rgba(14,14,18,.14)); }
+.trust-cell img { filter: drop-shadow(0 6px 10px rgba(14,14,18,.12)); }
+.site-header { box-shadow: 0 1px 0 rgba(14,14,18,.04), 0 10px 30px -18px rgba(14,14,18,.25); }
+.mobile-bar { box-shadow: 0 -10px 30px -12px rgba(14,14,18,.2); }
+
+/* cursor spotlight: light that follows the pointer across tiles */
+.tile, .pcard, .info-card, .card, .steps li, .process-step, .trust-card { --mx: 50%; --my: 50%; }
+.tile::after, .pcard::after, .info-card::after, .card::after, .steps li::after, .process-step::after, .trust-card::after,
+.glass-stats > div::after, .pillars li::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent-rgb), .13), transparent 65%);
+}
+.tile-dark::after, .pcard-dark::after, .glass-stats > div::after, .pillars li::after, .pcard-wide::after {
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.2), transparent 65%);
+}
+.tile:hover::after, .pcard:hover::after, .info-card:hover::after, .card:hover::after, .steps li:hover::after, .process-step:hover::after, .trust-card:hover::after,
+.glass-stats > div:hover::after, .pillars li:hover::after { opacity: 1; }
+.glass-stats > div, .pillars li { position: relative; overflow: hidden; }
+
+/* soft light pool behind section headings */
+.head-center { position: relative; }
+.section.alt { background: linear-gradient(180deg, #fff, #fafafa 12%, #fafafa 88%, #fff); }
+@media (prefers-reduced-motion: reduce) { .hero-tile .float-card { animation: none; } }
+em { letter-spacing: .005em; }

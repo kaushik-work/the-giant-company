@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import MobileBar from "@/components/MobileBar";
 import Footer from "@/components/Footer";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import Spotlight from "@/components/Spotlight";
 import { contact } from "@/lib/data";
 import { site, SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <MobileBar />
         <ThemeSwitcher />
+        <Spotlight />
       </body>
     </html>
   );
