@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const s = getService((await params).slug);
   if (!s) return {};
   return {
-    title: `${s.title} in Bengaluru`,
+    title: s.seoTitle ?? `${s.title} in Bengaluru`,
     description: `${s.text} ${s.intro}`.slice(0, 300),
     alternates: { canonical: `/services/${s.slug}` },
     openGraph: { url: `/services/${s.slug}`, title: `${s.title} | The Gaint Company`, description: s.text },

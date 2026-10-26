@@ -110,6 +110,8 @@ export const projects: Project[] = [
     summary: "Group trips, Moonlight AI concierge, flight fares and trips in one app.",
     overview:
       "A Flutter app for Android and iOS with a five-tab shell — Home, Moonlight, Flights, Trips and Profile. It runs on live data: group trips and leads against the Trripah CRM, the Moonlight chat on its own backend, and real nightly-scraped fares from Flight Klub for the Flight Finder.",
+    logo: "/logos/trripah-app.png",
+    logoDark: true,
     icon: "phone",
     cls: "t2",
     built: [

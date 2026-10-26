@@ -3,6 +3,7 @@ import { Inter, Instrument_Serif } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import MobileBar from "@/components/MobileBar";
 import Footer from "@/components/Footer";
+import { services } from "@/lib/services";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Spotlight from "@/components/Spotlight";
 import { contact } from "@/lib/data";
@@ -15,7 +16,7 @@ const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["nor
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Software Development Company in Bengaluru | The Gaint Company",
+    default: "Website & Software Development Company in Bangalore | The Gaint Company",
     template: "%s | The Gaint Company",
   },
   description: site.description,
@@ -56,7 +57,9 @@ const schema = {
       },
       geo: { "@type": "GeoCoordinates", latitude: 12.9875, longitude: 77.5523 },
       areaServed: [{ "@type": "City", name: "Bengaluru" }, { "@type": "Country", name: "India" }],
-      knowsAbout: ["Custom software development", "CRM development", "AI chatbots", "Workflow automation", "SaaS development"],
+      knowsAbout: ["Custom software development", "Website development", "CRM development", "AI chatbots", "WhatsApp chatbots", "Lead generation", "Workflow automation", "SaaS development", "AI-assisted coding"],
+      slogan: "Software that automates your business",
+      hasOfferCatalog: { "@type": "OfferCatalog", name: "Services", itemListElement: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.title, description: s.text, url: `${SITE_URL}/services/${s.slug}` } })) },
       sameAs: ["https://campusgoindia.com"],
     },
     {

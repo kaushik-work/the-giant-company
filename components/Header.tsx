@@ -13,6 +13,7 @@ export default function Header() {
           <a href="/services">Services</a>
           <a href="/projects">Projects</a>
           <a href="/process">Process</a>
+          <a href="/blog">Blog</a>
           <a href="/faq">FAQ</a>
           <a href="/contact" className="btn btn-small nav-cta">Let&apos;s talk</a>
         </nav>

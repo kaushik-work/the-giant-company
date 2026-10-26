@@ -6,19 +6,22 @@ export const site = {
   name: "The Gaint Company",
   tagline: "Custom software, CRMs and AI automation, built in Bengaluru",
   description:
-    "The Gaint Company is a Bengaluru software development studio building custom software, CRMs, SaaS products, websites, workflow automation and AI chatbots for growing businesses across India.",
+    "The Gaint Company is a Bangalore (Bengaluru) software and website development company building custom software, CRMs, SaaS products, workflow automation, AI chatbots and WhatsApp chatbots for growing businesses across India and worldwide.",
   locale: "en_IN",
   url: SITE_URL,
   keywords: [
-    "software development company Bengaluru",
+    "website development company in bangalore",
+    "software development company bangalore",
     "custom software development",
-    "CRM development",
-    "workflow automation",
-    "AI chatbot development",
-    "SaaS product development",
-    "web development company Bangalore",
-    "Next.js development",
+    "crm software for small business",
+    "workflow automation tools",
+    "ai chatbot for website",
+    "whatsapp chatbot for business",
+    "lead generation chatbot",
+    "saas product development",
+    "next.js development company",
   ],
+
 };
 
 export const faqs = [

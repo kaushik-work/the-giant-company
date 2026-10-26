@@ -2,6 +2,7 @@ export type Service = {
   slug: string;
   icon: string;
   title: string;
+  seoTitle?: string;
   text: string;
   intro: string;
   points: { title: string; text: string }[];
@@ -12,6 +13,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "custom-software-development",
+    seoTitle: "Custom Software Development Company in Bangalore",
     icon: "code",
     title: "Custom Software Development",
     text: "Tailor-made software built around how your business actually operates.",
@@ -27,6 +29,7 @@ export const services: Service[] = [
   },
   {
     slug: "crm-development",
+    seoTitle: "CRM Software Development for Small Business",
     icon: "crm",
     title: "CRM Development",
     text: "Sales, quotation and lead-management CRMs that your team will actually use.",
@@ -42,6 +45,7 @@ export const services: Service[] = [
   },
   {
     slug: "web-development",
+    seoTitle: "Website Development Company in Bangalore",
     icon: "globe",
     title: "Web Development",
     text: "Fast, SEO-friendly business websites and lead-generation platforms.",
@@ -57,6 +61,7 @@ export const services: Service[] = [
   },
   {
     slug: "workflow-automation",
+    seoTitle: "Workflow Automation Software for Business",
     icon: "workflow",
     title: "Workflow Automation",
     text: "Replace spreadsheets and manual hand-offs with automated digital workflows.",
@@ -72,6 +77,7 @@ export const services: Service[] = [
   },
   {
     slug: "saas-product-development",
+    seoTitle: "SaaS Product Development Company in Bangalore",
     icon: "rocket",
     title: "SaaS Product Development",
     text: "From MVP to multi-tenant SaaS, designed to scale with your users.",
@@ -87,6 +93,7 @@ export const services: Service[] = [
   },
   {
     slug: "ai-intelligent-automation",
+    seoTitle: "AI Chatbot and WhatsApp Chatbot Development",
     icon: "bot",
     title: "AI & Intelligent Automation",
     text: "Chatbots, document processing and AI assistants wired into your operations.",
