@@ -43,7 +43,6 @@ export default function Home() {
         {/* HERO */}
         <section className="hero">
           <div className="container hero-center">
-            <p className="hero-kicker">The Gaint Company</p>
             <h1>
               Software that <em>automates</em><br />your business.
             </h1>
