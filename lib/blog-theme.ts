@@ -9,5 +9,6 @@ export const clusterAccent: Record<string, string> = {
   CRM: "#ec4899",
   "Workflow automation": "#f97316",
   "Search Console": "#14b8a6",
+  "Software development": "#6366f1",
 };
 export const accentFor = (cluster: string) => clusterAccent[cluster] ?? "#ff4d4d";

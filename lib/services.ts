@@ -9,9 +9,15 @@ export type Service = {
   points: { title: string; text: string }[];
   stack: string[];
   related: string[];
+  // Long-form content (service pages are expected to be substantial to compete in search)
+  body?: string[];
+  process?: { title: string; text: string }[];
+  deliverables?: string[];
+  costFactors?: string[];
+  industries?: string[];
 };
 
-export const services: Service[] = [
+const baseServices: Service[] = [
   {
     slug: "custom-software-development",
     seoTitle: "Custom Software Development Company in India and Bangalore",
@@ -124,4 +130,11 @@ export const services: Service[] = [
   },
 ];
 
-export const getService = (slug: string) => services.find((s) => s.slug === slug);
+import { coreContent } from "./service-content";
+import { moreServices } from "./services-more";
+
+// The six headline services (home page, footer, city and industry pages).
+export const services: Service[] = baseServices.map((s) => ({ ...s, ...coreContent[s.slug] }));
+// Every service landing page, including the specialties.
+export const allServices: Service[] = [...services, ...moreServices];
+export const getService = (slug: string) => allServices.find((s) => s.slug === slug);

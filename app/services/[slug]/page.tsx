@@ -6,13 +6,14 @@ import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
 import ProjectCard from "@/components/ProjectCard";
 import { FaqBlock } from "@/components/SeoBlocks";
-import { getService, services } from "@/lib/services";
+import { allServices, getService } from "@/lib/services";
 import { getProject } from "@/lib/projects";
 import { SITE_URL } from "@/lib/site";
-import { cities, hasCityPage } from "@/lib/seo";
+import { cities, contactHref, getIndustry, hasCityPage, hasIndustryHub } from "@/lib/seo";
+import { CtaBand } from "@/components/SeoBlocks";
 
 export function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
+  return allServices.map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -30,7 +31,16 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const s = getService((await params).slug);
   if (!s) notFound();
   const related = s.related.map(getProject).filter((p): p is NonNullable<typeof p> => !!p);
-  const others = services.filter((x) => x.slug !== s.slug);
+  const others = allServices.filter((x) => x.slug !== s.slug);
+  const cta = contactHref(s.slug, `/services/${s.slug}`);
+  const process = s.process ?? [
+    { title: "Discover", text: "A call to understand your process, users and goals, and what success looks like." },
+    { title: "Scope in writing", text: "A written scope, timeline and cost before any build begins, so there are no surprises." },
+    { title: "Design", text: "Prototypes, data model and architecture you can react to early." },
+    { title: "Build in short sprints", text: "Each sprint ends in a working demo, with a shared board to see progress at any time." },
+    { title: "Launch and support", text: "Release, monitoring and support, with documentation so you are never locked in." },
+  ];
+  const industries = (s.industries ?? []).map((i) => getIndustry(i)).filter((i): i is NonNullable<typeof i> => !!i);
 
   const schema = {
     "@context": "https://schema.org",
@@ -66,15 +76,24 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <h1 className="page-title">{s.title}</h1>
             <p className="section-sub">{s.intro}</p>
             <div className="hero-cta center-cta">
-              <Link className="btn btn-red" href="/contact">Discuss your project</Link>
+              <Link className="btn btn-red" href={cta}>Discuss your project</Link>
               <Link className="link-arrow" href="/projects">See our work</Link>
             </div>
           </div>
         </section>
 
+        {s.body && (
+          <section className="section pt0">
+            <div className="container narrow">
+              <div className="prose">{s.body.map((para) => <p key={para.slice(0, 30)}>{para}</p>)}</div>
+            </div>
+          </section>
+        )}
+
         <section className="section pt0">
-          <div className="container">
-            <div className="bento compact">
+          <div className="container head-center">
+            <h2>What we build</h2>
+            <div className="bento compact mt">
               {s.points.map((p, i) => (
                 <article className="tile" style={{ "--span": 3 } as React.CSSProperties} key={p.title}>
                   <span className="num">0{i + 1}</span>
@@ -87,6 +106,22 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
 
+        {s.deliverables && (
+          <section className="section alt">
+            <div className="container narrow">
+              <h2 className="head-center">What you get</h2>
+              <ul className="svc-list">{s.deliverables.map((d) => <li key={d}>{d}</li>)}</ul>
+            </div>
+          </section>
+        )}
+
+        <section className="section">
+          <div className="container head-center">
+            <h2>How we <em>work</em></h2>
+            <div className="mt"><ol className="svc-steps">{process.map((st, i) => <li key={st.title}><span>{i + 1}</span><div><h3>{st.title}</h3><p>{st.text}</p></div></li>)}</ol></div>
+          </div>
+        </section>
+
         {related.length > 0 && (
           <section className="section alt">
             <div className="container head-center">
@@ -94,6 +129,28 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <div className="bento mt">
                 {related.map((p) => <ProjectCard key={p.slug} p={p} span={related.length === 1 ? 6 : related.length === 2 ? 3 : 2} />)}
               </div>
+            </div>
+          </section>
+        )}
+
+        {industries.length > 0 && (
+          <section className="section pt0">
+            <div className="container head-center">
+              <h2>Industries we build for</h2>
+              <ul className="chips center-chips">
+                {industries.map((i) => <li key={i.slug}>{hasIndustryHub(i.slug) ? <Link href={`/industries/${i.slug}`}>{i.name}</Link> : i.name}</li>)}
+              </ul>
+            </div>
+          </section>
+        )}
+
+        {s.costFactors && (
+          <section className="section alt">
+            <div className="container narrow">
+              <h2 className="head-center">What affects the cost</h2>
+              <p className="section-sub head-center-sub">We do not publish a single price, because it would mislead. These are the things that move it. We agree scope and cost in writing before any build starts.</p>
+              <ul className="svc-list">{s.costFactors.map((d) => <li key={d}>{d}</li>)}</ul>
+              <div className="hero-cta center-cta mt"><Link className="btn btn-red" href={cta}>Get a scoped estimate</Link></div>
             </div>
           </section>
         )}
@@ -112,7 +169,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </section>
         )}
 
-        <section className="section">
+        <section className="section pt0">
           <div className="container head-center">
             <h2>More services</h2>
             <ul className="chips center-chips">
@@ -120,6 +177,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </ul>
           </div>
         </section>
+
+        <CtaBand href={cta} />
       </main>
     </>
   );

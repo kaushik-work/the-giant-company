@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import PageHero from "@/components/PageHero";
 import ServicesBento from "@/components/ServicesBento";
 import JsonLd from "@/components/JsonLd";
-import { services } from "@/lib/services";
+import { allServices, services } from "@/lib/services";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function ServicesPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: services.map((s, i) => ({
+    itemListElement: allServices.map((s, i) => ({
       "@type": "ListItem",
       position: i + 1,
       url: `${SITE_URL}/services/${s.slug}`,
@@ -37,6 +37,10 @@ export default function ServicesPage() {
         <section className="section pt0">
           <div className="container">
             <ServicesBento />
+            <h2 className="mt center-text">Specialities</h2>
+            <ul className="chips center-chips">
+              {allServices.filter((x) => !services.includes(x)).map((x) => <li key={x.slug}><Link href={`/services/${x.slug}`}>{x.title}</Link></li>)}
+            </ul>
             <h2 className="mt center-text">Our stack</h2>
             <ul className="chips center-chips">{stack.map((t) => <li key={t}>{t}</li>)}</ul>
             <div className="hero-cta mt center-cta">

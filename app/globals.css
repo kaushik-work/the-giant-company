@@ -1049,3 +1049,15 @@ em { letter-spacing: .005em; }
 .cf-fallback a { justify-self: start; }
 
 .footer-legal { margin-top: 12px; font-size: .85rem; color: #8b8e9c; }
+
+/* Service pages: long-form sections */
+.svc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; margin-top: 28px; }
+.svc-list li { position: relative; padding: 14px 18px 14px 44px; background: #fff; border: 1px solid #ececf0; border-radius: 16px; font-size: .98rem; color: var(--text); }
+.svc-list li::before { content: "✓"; position: absolute; left: 16px; top: 13px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: .72rem; color: #fff; background: var(--accent); }
+.svc-steps { list-style: none; display: grid; gap: 14px; max-width: 780px; margin: 0 auto; text-align: left; }
+.svc-steps li { display: flex; gap: 18px; align-items: flex-start; padding: 20px 22px; background: #fff; border: 1px solid #ececf0; border-radius: 20px; }
+.svc-steps li > span { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; background: var(--accent); }
+.svc-steps h3 { font-size: 1.05rem; margin-bottom: 2px; }
+.svc-steps p { font-size: .94rem; }
+.head-center-sub { text-align: center; margin-left: auto; margin-right: auto; }
+@media (max-width: 720px) { .svc-list { grid-template-columns: 1fr; } }

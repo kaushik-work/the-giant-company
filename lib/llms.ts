@@ -1,6 +1,6 @@
 import { contact } from "./data";
 import { projects } from "./projects";
-import { services } from "./services";
+import { allServices, services } from "./services";
 import { cities, cityServiceSlugs, comparisons, industries, industryHubs, industryPairs, problems } from "./seo";
 import { faqs, site, SITE_URL } from "./site";
 import { getAllPosts, type Post } from "./blog";
@@ -32,7 +32,7 @@ Last updated: ${updated}. Full text of the key content is at ${SITE_URL}/llms-fu
 - Address: ${contact.address}
 
 ## Services
-${services.map((s) => `- [${s.title}](${SITE_URL}/services/${s.slug}): ${s.text}`).join("\n")}
+${allServices.map((s) => `- [${s.title}](${SITE_URL}/services/${s.slug}): ${s.text}`).join("\n")}
 
 ## Projects (real work we have shipped)
 ${projects.map((p) => `- [${p.name}](${SITE_URL}${projectPath(p.slug)}) (${p.industry}): ${p.summary}`).join("\n")}
@@ -64,7 +64,7 @@ export async function buildLlmsFull() {
   const parts: string[] = [];
   parts.push(`# ${site.name}: full content\n\n> ${about}\n\nSource: ${SITE_URL}. This file concatenates the main content of the site for language models. Canonical pages are on the website.`);
   parts.push(`## Contact\n- Phone / WhatsApp: ${contact.phone}\n- Address: ${contact.address}\n- Contact page: ${SITE_URL}/contact`);
-  parts.push(`## Services\n\n${services.map((s) => `### ${s.title}\nURL: ${SITE_URL}/services/${s.slug}\n${s.intro}\n\n${s.points.map((x) => `- **${x.title}.** ${x.text}`).join("\n")}\n\nTechnology: ${s.stack.join(", ")}`).join("\n\n")}`);
+  parts.push(`## Services\n\n${allServices.map((s) => `### ${s.title}\nURL: ${SITE_URL}/services/${s.slug}\n${s.intro}\n\n${(s.body ?? []).join("\n\n")}\n\n${s.points.map((x) => `- **${x.title}.** ${x.text}`).join("\n")}\n\nTechnology: ${s.stack.join(", ")}${(s.faqs ?? []).length ? `\n\nFAQ:\n${(s.faqs ?? []).map((f) => `- ${f.q} ${f.a}`).join("\n")}` : ""}`).join("\n\n")}`);
   parts.push(`## Projects\n\n${projects.map((p) => `### ${p.name}\nURL: ${SITE_URL}${projectPath(p.slug)}${p.url ? `\nLive site: ${p.url}` : ""}\nIndustry: ${p.industry}\n${p.overview}\n\nWhat we built:\n${p.built.map((b) => `- ${b}`).join("\n")}\n\nTechnology: ${p.stack.join(", ")}`).join("\n\n")}`);
   parts.push(`## Problems we solve\n\n${problems.map((p) => `### ${p.title}\nURL: ${SITE_URL}/solutions/${p.slug}\nProblem: ${p.problem}\nCost: ${p.cost}\nHow we fix it:\n${p.steps.map((s) => `- **${s.title}.** ${s.text}`).join("\n")}`).join("\n\n")}`);
   parts.push(`## Comparisons\n\n${comparisons.map((c) => `### ${c.title}\nURL: ${SITE_URL}/compare/${c.slug}\n${c.intro}\n\n| Factor | ${c.a} | ${c.b} |\n|---|---|---|\n${c.rows.map((r) => `| ${r[0]} | ${r[1]} | ${r[2]} |`).join("\n")}\n\nChoose ${c.a.toLowerCase()} if: ${c.chooseA.join("; ")}.\nChoose ${c.b.toLowerCase()} if: ${c.chooseB.join("; ")}.\nOur take: ${c.verdict}`).join("\n\n")}`);

@@ -312,6 +312,16 @@ export const needFor: Record<string, string> = {
   "workflow-automation": "Automation",
   "saas-product-development": "Custom software",
   "ai-intelligent-automation": "AI chatbot",
+  "whatsapp-chatbot-development": "AI chatbot",
+  "ai-agent-development": "AI chatbot",
+  "mobile-app-development": "Custom software",
+  "mvp-development": "Custom software",
+  "nextjs-development": "Website",
+  "web-application-development": "Custom software",
+  "website-redesign": "Website",
+  "website-maintenance": "Website",
+  "travel-software-development": "CRM",
+  "education-software-development": "Custom software",
 };
 export const contactHref = (serviceSlug: string, from: string) =>
   `/contact?need=${encodeURIComponent(needFor[serviceSlug] ?? "")}&from=${encodeURIComponent(from)}`;
