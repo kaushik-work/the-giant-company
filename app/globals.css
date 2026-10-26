@@ -614,12 +614,6 @@ em { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit
 .pcard-media { background: radial-gradient(circle at 50% 120%, rgba(var(--accent-rgb), .12), transparent 60%), linear-gradient(#fff, #fafaf7); }
 .stat-cards .hot { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
 
-/* ================= Theme switcher ================= */
-.theme-switch { position: fixed; left: 16px; bottom: 16px; z-index: 80; display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 999px; background: rgba(255,255,255,.9); border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,.15); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); font-size: .72rem; font-weight: 600; color: var(--muted); }
-.theme-switch button { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--border); cursor: pointer; }
-.theme-switch button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--text); }
-@media (max-width: 760px) { .theme-switch { bottom: 82px; } }
-
 /* ===== Black & red theme: black panels with red highlights ===== */
 .hero-tile,
 .moon-panel,

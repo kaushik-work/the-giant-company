@@ -4,7 +4,6 @@ import JsonLd from "@/components/JsonLd";
 import MobileBar from "@/components/MobileBar";
 import Footer from "@/components/Footer";
 import { services } from "@/lib/services";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Spotlight from "@/components/Spotlight";
 import { contact } from "@/lib/data";
 import { site, SITE_URL } from "@/lib/site";
@@ -76,19 +75,11 @@ const schema = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${serif.variable}`} data-theme="noir" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme");if(t){document.documentElement.dataset.theme=t}}catch(e){}`,
-          }}
-        />
-      </head>
       <body>
         <JsonLd data={schema} />
         {children}
         <Footer />
         <MobileBar />
-        <ThemeSwitcher />
         <Spotlight />
       </body>
     </html>
