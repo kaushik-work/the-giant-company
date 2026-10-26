@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import { Crumbs, CtaBand } from "@/components/SeoBlocks";
-import { cities } from "@/lib/seo";
+import { cities, hasCityPage } from "@/lib/seo";
 import { services } from "@/lib/services";
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function LocationsPage() {
               <div className="loc-card" key={c.slug}>
                 <h2>{c.name}</h2>
                 <p>{c.region}</p>
-                <ul>{services.map((s) => <li key={s.slug}><Link href={`/services/${s.slug}/${c.slug}`}>{s.title}</Link></li>)}</ul>
+                <ul>{services.filter((s) => hasCityPage(s.slug)).map((s) => <li key={s.slug}><Link href={`/services/${s.slug}/${c.slug}`}>{s.title}</Link></li>)}</ul>
               </div>
             ))}
           </div>

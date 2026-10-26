@@ -1,0 +1,52 @@
+{
+  "cityServices": [
+    "custom-software-development",
+    "web-development"
+  ],
+  "industryPairs": [
+    {
+      "service": "crm-development",
+      "industry": "real-estate"
+    },
+    {
+      "service": "crm-development",
+      "industry": "healthcare"
+    },
+    {
+      "service": "crm-development",
+      "industry": "travel-tourism"
+    },
+    {
+      "service": "ai-intelligent-automation",
+      "industry": "real-estate"
+    },
+    {
+      "service": "ai-intelligent-automation",
+      "industry": "education"
+    },
+    {
+      "service": "web-development",
+      "industry": "retail-ecommerce"
+    }
+  ],
+  "allServices": [
+    "custom-software-development",
+    "crm-development",
+    "web-development",
+    "workflow-automation",
+    "saas-product-development",
+    "ai-intelligent-automation"
+  ],
+  "allIndustries": [
+    "travel-tourism",
+    "education",
+    "real-estate",
+    "export-import",
+    "manufacturing",
+    "healthcare",
+    "retail-ecommerce",
+    "logistics",
+    "finance-services",
+    "startups-it"
+  ]
+}

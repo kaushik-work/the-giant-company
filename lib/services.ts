@@ -3,6 +3,7 @@ export type Service = {
   icon: string;
   title: string;
   seoTitle?: string;
+  faqs?: { q: string; a: string }[];
   text: string;
   intro: string;
   points: { title: string; text: string }[];
@@ -13,7 +14,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "custom-software-development",
-    seoTitle: "Custom Software Development Company in Bangalore",
+    seoTitle: "Custom Software Development Company in India and Bangalore",
     icon: "code",
     title: "Custom Software Development",
     text: "Tailor-made software built around how your business actually operates.",
@@ -29,7 +30,7 @@ export const services: Service[] = [
   },
   {
     slug: "crm-development",
-    seoTitle: "CRM Software Development for Small Business",
+    seoTitle: "CRM Development Company in India | Custom CRM Software",
     icon: "crm",
     title: "CRM Development",
     text: "Sales, quotation and lead-management CRMs that your team will actually use.",
@@ -39,6 +40,13 @@ export const services: Service[] = [
       { title: "Quotes & itineraries", text: "Builders that turn requirements into a branded, shareable quote or itinerary for the client." },
       { title: "Email automation", text: "Automatic emails to partners and customers, with sends logged against the right record." },
       { title: "Payments & reports", text: "Razorpay collection, payment status tracking and management reports." },
+    ],
+    faqs: [
+      { q: "What does a CRM development company do?", a: "It designs and builds a customer relationship management system around your sales process: lead capture, pipeline stages, quotes, follow-up reminders, email and WhatsApp, payments and reports. We build it from your process rather than asking you to adapt to a template." },
+      { q: "Should we build a custom CRM or use Zoho or HubSpot?", a: "Use a ready-made CRM if your process is fairly standard and you need to start now. Build custom when your workflow has steps no tool supports, per-user pricing is becoming painful, or automation tied to your operations is the main goal. We say so plainly when a ready-made tool is enough." },
+      { q: "Can the CRM connect to WhatsApp, email and payments?", a: "Yes. In our Trripah CRM we send branded quote-request emails, log replies, parse supplier quotes with AI and collect payments through Razorpay. We use official APIs for Gmail, WhatsApp and payment gateways." },
+      { q: "How long does a custom CRM take to build?", a: "It depends on scope, which we agree in writing before any build starts. We favour a usable first version in weeks, then add features based on how your team actually uses it." },
+      { q: "Do you work with businesses outside Bangalore?", a: "Yes. We work with clients across India and worldwide over video calls, WhatsApp and a shared progress board, with a demo at the end of each short sprint." },
     ],
     stack: ["Next.js", "MongoDB", "Razorpay", "Gmail OAuth2", "Resend", "Firebase OTP"],
     related: ["trripah-crm", "fido-exim"],
@@ -93,7 +101,7 @@ export const services: Service[] = [
   },
   {
     slug: "ai-intelligent-automation",
-    seoTitle: "AI Chatbot and WhatsApp Chatbot Development",
+    seoTitle: "AI Chatbot Development Company in India | Website and WhatsApp Bots",
     icon: "bot",
     title: "AI & Intelligent Automation",
     text: "Chatbots, document processing and AI assistants wired into your operations.",
@@ -103,6 +111,13 @@ export const services: Service[] = [
       { title: "Document parsing", text: "Turn quotes, emails and PDFs into structured data your system can use." },
       { title: "Guardrails", text: "Rules like never quoting prices, per-IP rate limits and session handling." },
       { title: "Your data, injected on demand", text: "Knowledge loaded per topic so answers stay accurate and prompts stay small." },
+    ],
+    faqs: [
+      { q: "What does an AI chatbot development company do?", a: "It designs and builds chatbots that answer questions in natural language, qualify visitors and capture leads, then hand them to your team or CRM. The work includes the persona and rules, your knowledge loaded on demand, guardrails and the lead hand-off." },
+      { q: "Which AI model do you use?", a: "We choose per use case. Our Moonlight trip planner runs on Claude Haiku 4.5, with a written persona, destination knowledge loaded only when needed and lead capture at the right moment." },
+      { q: "Can the chatbot run on WhatsApp as well as our website?", a: "Yes. We build for the website and for WhatsApp through the official WhatsApp Business Platform, with the same rules and the same lead hand-off." },
+      { q: "Will the chatbot make things up or quote wrong prices?", a: "We reduce the risk with approved content, clear rules and hand-off to a person when unsure. Moonlight deliberately never quotes prices. No chatbot is risk-free, so we review real conversations after launch." },
+      { q: "Can the chatbot send leads to our CRM?", a: "Yes. Each lead is saved as structured data with a summary of the conversation, assigned to an owner and tracked. We also build the CRM if you do not have one." },
     ],
     stack: ["Claude API", "Spring Boot", "Java", "Node.js", "MongoDB", "Docker"],
     related: ["moonlight-ai", "trripah-crm"],

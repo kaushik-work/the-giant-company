@@ -3,19 +3,21 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
 import { CtaBand, FaqBlock, LinkChips, Proof, SeoHero, Tiles } from "@/components/SeoBlocks";
-import { contactHref, getIndustry, industries, industryFaqs, useCase } from "@/lib/seo";
+import { contactHref, getIndustry, hasIndustryPage, industries, industryFaqs, industryPairs, useCase } from "@/lib/seo";
 import { getService, services } from "@/lib/services";
 import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
-  return industries.flatMap((i) => services.map((s) => ({ industry: i.slug, slug: s.slug })));
+  return industryPairs.map((p) => ({ industry: p.industry, slug: p.service }));
 }
+export const dynamicParams = false;
+
 type P = { params: Promise<{ industry: string; slug: string }> };
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {
   const { industry, slug } = await params;
   const i = getIndustry(industry), s = getService(slug);
-  if (!i || !s) return {};
+  if (!i || !s || !hasIndustryPage(i.slug, s.slug)) return {};
   const path = `/industries/${i.slug}/${s.slug}`;
   const title = `${s.title} for ${i.name}`;
   const description = `${useCase(s, i)} Built by a Bengaluru studio working with ${i.who} across India and worldwide.`;
@@ -25,7 +27,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
 export default async function IndustryServicePage({ params }: P) {
   const { industry, slug } = await params;
   const i = getIndustry(industry), s = getService(slug);
-  if (!i || !s) notFound();
+  if (!i || !s || !hasIndustryPage(i.slug, s.slug)) notFound();
   const path = `/industries/${i.slug}/${s.slug}`;
   const cta = contactHref(s.slug, path);
   const proof = [...new Set([...i.proof, ...s.related])];
@@ -67,8 +69,8 @@ export default async function IndustryServicePage({ params }: P) {
         </section>
         <Proof slugs={proof} heading={i.proof.length ? "Related work" : "Closest work we have shipped"} />
         <FaqBlock items={industryFaqs(s, i)} />
-        <LinkChips heading={`More for ${i.name.toLowerCase()}`} links={services.filter((x) => x.slug !== s.slug).map((x) => ({ label: x.title, href: `/industries/${i.slug}/${x.slug}` }))} />
-        <LinkChips heading={`${s.title} for other industries`} links={industries.filter((x) => x.slug !== i.slug).map((x) => ({ label: x.name, href: `/industries/${x.slug}/${s.slug}` }))} />
+        <LinkChips heading={`More for ${i.name.toLowerCase()}`} links={services.filter((x) => x.slug !== s.slug).map((x) => ({ label: x.title, href: hasIndustryPage(i.slug, x.slug) ? `/industries/${i.slug}/${x.slug}` : `/services/${x.slug}` }))} />
+        <LinkChips heading={`${s.title} for other industries`} links={industries.filter((x) => x.slug !== i.slug && hasIndustryPage(x.slug, s.slug)).map((x) => ({ label: x.name, href: `/industries/${x.slug}/${s.slug}` }))} />
         <CtaBand href={cta} />
       </main>
     </>

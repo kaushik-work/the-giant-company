@@ -1,5 +1,6 @@
 import { services, type Service } from "./services";
 import { getProject } from "./projects";
+import allow from "./seo-allow.json";
 
 // ---------- Industries (also the sector vocabulary used by cities) ----------
 export type Industry = {
@@ -128,18 +129,18 @@ export const cities: City[] = [
   { slug: "bengaluru", name: "Bengaluru", region: "Karnataka", blurb: "Bengaluru is our home. We work from Rajajinagar and can meet in person for workshops and demos.", sectors: ["startups-it", "education", "real-estate"], nearby: ["hyderabad", "chennai", "kochi"] },
   { slug: "mumbai", name: "Mumbai", region: "Maharashtra", blurb: "Mumbai businesses run on speed: trade, finance, media and logistics all depend on quick hand-offs.", sectors: ["finance-services", "logistics", "retail-ecommerce"], nearby: ["pune", "ahmedabad", "surat"] },
   { slug: "delhi-ncr", name: "Delhi NCR", region: "Delhi, Gurugram, Noida", blurb: "Delhi NCR mixes large service companies, manufacturers and fast-growing startups across several cities.", sectors: ["manufacturing", "startups-it", "travel-tourism"], nearby: ["chandigarh", "jaipur", "indore"] },
-  { slug: "hyderabad", name: "Hyderabad", region: "Telangana", blurb: "Hyderabad combines a large IT workforce with healthcare, pharma and education businesses.", sectors: ["healthcare", "startups-it", "education"], nearby: ["bengaluru", "visakhapatnam", "chennai"] },
+  { slug: "hyderabad", name: "Hyderabad", region: "Telangana", blurb: "Hyderabad combines a large IT workforce with healthcare, pharma and education businesses.", sectors: ["healthcare", "startups-it", "education"], nearby: ["bengaluru", "chennai", "pune"] },
   { slug: "chennai", name: "Chennai", region: "Tamil Nadu", blurb: "Chennai is a manufacturing and export hub, with a busy port and a long list of trade businesses.", sectors: ["manufacturing", "export-import", "logistics"], nearby: ["bengaluru", "coimbatore", "hyderabad"] },
   { slug: "pune", name: "Pune", region: "Maharashtra", blurb: "Pune has a strong base of manufacturers, IT companies and educational institutions.", sectors: ["manufacturing", "education", "startups-it"], nearby: ["mumbai", "ahmedabad", "indore"] },
-  { slug: "kolkata", name: "Kolkata", region: "West Bengal", blurb: "Kolkata has long-established trading, education and logistics businesses that still run on manual processes.", sectors: ["export-import", "education", "logistics"], nearby: ["visakhapatnam", "delhi-ncr", "chandigarh"] },
+  { slug: "kolkata", name: "Kolkata", region: "West Bengal", blurb: "Kolkata has long-established trading, education and logistics businesses that still run on manual processes.", sectors: ["export-import", "education", "logistics"], nearby: ["lucknow", "delhi-ncr", "chandigarh"] },
   { slug: "ahmedabad", name: "Ahmedabad", region: "Gujarat", blurb: "Ahmedabad is built on trade and manufacturing, with many family-run businesses ready to digitise.", sectors: ["manufacturing", "export-import", "retail-ecommerce"], nearby: ["surat", "mumbai", "indore"] },
   { slug: "jaipur", name: "Jaipur", region: "Rajasthan", blurb: "Jaipur's economy leans on tourism, handicrafts and exports, with plenty of agencies selling to travellers and buyers abroad.", sectors: ["travel-tourism", "export-import", "retail-ecommerce"], nearby: ["delhi-ncr", "indore", "ahmedabad"] },
   { slug: "kochi", name: "Kochi", region: "Kerala", blurb: "Kochi combines a major port with tourism and a growing services sector.", sectors: ["logistics", "travel-tourism", "healthcare"], nearby: ["bengaluru", "chennai", "coimbatore"] },
   { slug: "coimbatore", name: "Coimbatore", region: "Tamil Nadu", blurb: "Coimbatore is an engineering and textile city, full of manufacturers selling to dealers and exporters.", sectors: ["manufacturing", "export-import", "education"], nearby: ["chennai", "kochi", "bengaluru"] },
   { slug: "surat", name: "Surat", region: "Gujarat", blurb: "Surat is known for textiles and diamonds, with trading businesses that handle large volumes of orders.", sectors: ["export-import", "manufacturing", "retail-ecommerce"], nearby: ["ahmedabad", "mumbai", "pune"] },
   { slug: "indore", name: "Indore", region: "Madhya Pradesh", blurb: "Indore is a fast-growing trading, education and services centre in central India.", sectors: ["retail-ecommerce", "education", "startups-it"], nearby: ["ahmedabad", "pune", "jaipur"] },
-  { slug: "chandigarh", name: "Chandigarh", region: "Chandigarh, Mohali, Panchkula", blurb: "The Chandigarh tri-city area has a mix of IT firms, healthcare providers and manufacturers.", sectors: ["healthcare", "startups-it", "manufacturing"], nearby: ["delhi-ncr", "jaipur", "kolkata"] },
-  { slug: "visakhapatnam", name: "Visakhapatnam", region: "Andhra Pradesh", blurb: "Visakhapatnam is a port city with shipping, logistics and a growing number of IT businesses.", sectors: ["logistics", "export-import", "real-estate"], nearby: ["hyderabad", "chennai", "kolkata"] },
+  { slug: "chandigarh", name: "Chandigarh", region: "Chandigarh, Mohali, Panchkula", blurb: "The Chandigarh tri-city area has a mix of IT firms, healthcare providers and manufacturers.", sectors: ["healthcare", "startups-it", "manufacturing"], nearby: ["delhi-ncr", "jaipur", "lucknow"] },
+  { slug: "lucknow", name: "Lucknow", region: "Uttar Pradesh", blurb: "Lucknow is a state capital with growing education, healthcare and retail businesses that still run on manual processes.", sectors: ["education", "healthcare", "retail-ecommerce"], nearby: ["delhi-ncr", "indore", "kolkata"] },
 ];
 export const getCity = (slug: string) => cities.find((c) => c.slug === slug);
 
@@ -315,3 +316,11 @@ export const needFor: Record<string, string> = {
 export const contactHref = (serviceSlug: string, from: string) =>
   `/contact?need=${encodeURIComponent(needFor[serviceSlug] ?? "")}&from=${encodeURIComponent(from)}`;
 export { services };
+
+// ---------- What we publish pages for (kept to combinations with real search demand) ----------
+export const cityServiceSlugs: string[] = allow.cityServices;
+export const industryPairs: { service: string; industry: string }[] = allow.industryPairs;
+export const hasCityPage = (serviceSlug: string) => cityServiceSlugs.includes(serviceSlug);
+export const hasIndustryPage = (industrySlug: string, serviceSlug: string) => industryPairs.some((p) => p.industry === industrySlug && p.service === serviceSlug);
+export const industryHubs = [...new Set(industryPairs.map((p) => p.industry))];
+export const hasIndustryHub = (industrySlug: string) => industryHubs.includes(industrySlug);

@@ -4,20 +4,22 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
 import { CtaBand, FaqBlock, LinkChips, Proof, SeoHero, Tiles } from "@/components/SeoBlocks";
-import { cities, cityFaqs, contactHref, getCity, getIndustry, useCase } from "@/lib/seo";
+import { cities, cityFaqs, cityServiceSlugs, contactHref, getCity, getIndustry, hasCityPage, hasIndustryPage, useCase } from "@/lib/seo";
 import { getService, services } from "@/lib/services";
 import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
-  return services.flatMap((s) => cities.map((c) => ({ slug: s.slug, city: c.slug })));
+  return services.filter((s) => hasCityPage(s.slug)).flatMap((s) => cities.map((c) => ({ slug: s.slug, city: c.slug })));
 }
+
+export const dynamicParams = false;
 
 type P = { params: Promise<{ slug: string; city: string }> };
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {
   const { slug, city } = await params;
   const s = getService(slug), c = getCity(city);
-  if (!s || !c) return {};
+  if (!s || !c || !hasCityPage(s.slug)) return {};
   const path = `/services/${s.slug}/${c.slug}`;
   const title = `${s.title} in ${c.name}`;
   const description = `${s.title} for ${c.name} businesses. ${s.text} Built by a Bengaluru studio working with clients across India and worldwide.`;
@@ -27,7 +29,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
 export default async function ServiceCityPage({ params }: P) {
   const { slug, city } = await params;
   const s = getService(slug), c = getCity(city);
-  if (!s || !c) notFound();
+  if (!s || !c || !hasCityPage(s.slug)) notFound();
   const path = `/services/${s.slug}/${c.slug}`;
   const cta = contactHref(s.slug, path);
   const sectors = c.sectors.map((id) => getIndustry(id)!);
@@ -60,7 +62,7 @@ export default async function ServiceCityPage({ params }: P) {
             <h2>What it looks like in {c.name}</h2>
             <p className="section-sub">Three kinds of business we expect to meet in {c.name}, and what {s.title.toLowerCase()} does for each.</p>
             <div className="mt">
-              <Tiles span={2} items={sectors.map((i) => ({ title: i.name, text: useCase(s, i), href: `/industries/${i.slug}/${s.slug}` }))} />
+              <Tiles span={2} items={sectors.map((i) => ({ title: i.name, text: useCase(s, i), href: hasIndustryPage(i.slug, s.slug) ? `/industries/${i.slug}/${s.slug}` : undefined }))} />
             </div>
           </div>
         </section>
@@ -90,7 +92,7 @@ export default async function ServiceCityPage({ params }: P) {
         <FaqBlock items={cityFaqs(s, c)} />
 
         <LinkChips heading={`${s.title} in other cities`} links={[...c.nearby, ...cities.map((x) => x.slug).filter((x) => x !== c.slug && !c.nearby.includes(x)).slice(0, 4)].map((x) => ({ label: getCity(x)!.name, href: `/services/${s.slug}/${x}` }))} />
-        <LinkChips heading={`More services in ${c.name}`} links={services.filter((x) => x.slug !== s.slug).map((x) => ({ label: x.title, href: `/services/${x.slug}/${c.slug}` }))} />
+        <LinkChips heading={`More services for ${c.name} businesses`} links={services.filter((x) => x.slug !== s.slug).map((x) => ({ label: x.title, href: cityServiceSlugs.includes(x.slug) ? `/services/${x.slug}/${c.slug}` : `/services/${x.slug}` }))} />
         <CtaBand href={cta} title={`Planning ${s.title.toLowerCase()} in ${c.name}?`} />
       </main>
     </>

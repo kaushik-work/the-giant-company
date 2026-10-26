@@ -5,10 +5,11 @@ import Header from "@/components/Header";
 import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
 import ProjectCard from "@/components/ProjectCard";
+import { FaqBlock } from "@/components/SeoBlocks";
 import { getService, services } from "@/lib/services";
 import { getProject } from "@/lib/projects";
 import { SITE_URL } from "@/lib/site";
-import { cities } from "@/lib/seo";
+import { cities, hasCityPage } from "@/lib/seo";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -97,6 +98,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </section>
         )}
 
+        {s.faqs && <FaqBlock items={s.faqs} />}
+
+        {hasCityPage(s.slug) && (
         <section className="section pt0">
           <div className="container head-center">
             <h2>{s.title} across India</h2>
@@ -106,6 +110,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </ul>
           </div>
         </section>
+        )}
 
         <section className="section">
           <div className="container head-center">

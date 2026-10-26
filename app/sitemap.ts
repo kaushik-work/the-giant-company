@@ -3,7 +3,7 @@ import { projects } from "@/lib/projects";
 import { services } from "@/lib/services";
 import { SITE_URL } from "@/lib/site";
 import { getAllPosts, getAllTags } from "@/lib/blog";
-import { cities, comparisons, industries, problems } from "@/lib/seo";
+import { cities, comparisons, hasCityPage, industryHubs, industryPairs, problems } from "@/lib/seo";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -15,9 +15,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
   const seoPages: MetadataRoute.Sitemap = [
     ...["/industries", "/solutions", "/compare", "/locations"].map((p) => ({ url: `${SITE_URL}${p}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 })),
-    ...services.flatMap((sv) => cities.map((c) => ({ url: `${SITE_URL}/services/${sv.slug}/${c.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: c.slug === "bengaluru" ? 0.8 : 0.6 }))),
-    ...industries.map((i) => ({ url: `${SITE_URL}/industries/${i.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
-    ...industries.flatMap((i) => services.map((sv) => ({ url: `${SITE_URL}/industries/${i.slug}/${sv.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 }))),
+    ...services.filter((sv) => hasCityPage(sv.slug)).flatMap((sv) => cities.map((c) => ({ url: `${SITE_URL}/services/${sv.slug}/${c.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: c.slug === "bengaluru" ? 0.8 : 0.6 }))),
+    ...industryHubs.map((slug) => ({ url: `${SITE_URL}/industries/${slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
+    ...industryPairs.map((pr) => ({ url: `${SITE_URL}/industries/${pr.industry}/${pr.service}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
     ...problems.map((p) => ({ url: `${SITE_URL}/solutions/${p.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 })),
     ...comparisons.map((c) => ({ url: `${SITE_URL}/compare/${c.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
   ];

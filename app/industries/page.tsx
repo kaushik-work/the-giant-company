@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import { CtaBand, Crumbs, Tiles } from "@/components/SeoBlocks";
-import { industries } from "@/lib/seo";
+import { industries, hasIndustryHub } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Industries we build software for",
@@ -23,7 +23,7 @@ export default function IndustriesPage() {
         </section>
         <section className="section pt0">
           <div className="container">
-            <Tiles span={2} items={industries.map((i) => ({ title: i.name, text: `For ${i.who}.`, href: `/industries/${i.slug}` }))} />
+            <Tiles span={2} items={industries.filter((i) => hasIndustryHub(i.slug)).map((i) => ({ title: i.name, text: `For ${i.who}.`, href: `/industries/${i.slug}` }))} />
           </div>
         </section>
         <CtaBand href="/contact?from=%2Findustries" />

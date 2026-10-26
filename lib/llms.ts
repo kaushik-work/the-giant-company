@@ -1,7 +1,7 @@
 import { contact } from "./data";
 import { projects } from "./projects";
 import { services } from "./services";
-import { cities, comparisons, industries, problems } from "./seo";
+import { cities, cityServiceSlugs, comparisons, industries, industryHubs, industryPairs, problems } from "./seo";
 import { faqs, site, SITE_URL } from "./site";
 import { getAllPosts, type Post } from "./blog";
 
@@ -44,10 +44,10 @@ ${problems.map((p) => `- [${p.title}](${SITE_URL}/solutions/${p.slug}): ${p.prob
 ${comparisons.map((c) => `- [${c.title}](${SITE_URL}/compare/${c.slug}): ${c.intro}`).join("\n")}
 
 ## Industries
-${industries.map((i) => `- [${i.name}](${SITE_URL}/industries/${i.slug}): software for ${i.who}`).join("\n")}
+${industries.filter((i) => industryHubs.includes(i.slug)).map((i) => `- [${i.name}](${SITE_URL}/industries/${i.slug}): software for ${i.who}`).join("\n")}
 
 ## Where we work
-- [Locations](${SITE_URL}/locations): service pages for ${cities.map((c) => c.name).join(", ")}. Each service has a page per city at ${SITE_URL}/services/<service>/<city>.
+- [Locations](${SITE_URL}/locations): Custom software development and web development pages for ${cities.map((c) => c.name).join(", ")}, at ${SITE_URL}/services/<service>/<city> for ${cityServiceSlugs.join(" and ")}.
 
 ## Guides and articles
 ${clusters.map((c) => `### ${c}\n${posts.filter((p) => p.cluster === c).map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}.md): ${p.description}`).join("\n")}`).join("\n\n")}
@@ -68,7 +68,7 @@ export async function buildLlmsFull() {
   parts.push(`## Projects\n\n${projects.map((p) => `### ${p.name}\nURL: ${SITE_URL}${projectPath(p.slug)}${p.url ? `\nLive site: ${p.url}` : ""}\nIndustry: ${p.industry}\n${p.overview}\n\nWhat we built:\n${p.built.map((b) => `- ${b}`).join("\n")}\n\nTechnology: ${p.stack.join(", ")}`).join("\n\n")}`);
   parts.push(`## Problems we solve\n\n${problems.map((p) => `### ${p.title}\nURL: ${SITE_URL}/solutions/${p.slug}\nProblem: ${p.problem}\nCost: ${p.cost}\nHow we fix it:\n${p.steps.map((s) => `- **${s.title}.** ${s.text}`).join("\n")}`).join("\n\n")}`);
   parts.push(`## Comparisons\n\n${comparisons.map((c) => `### ${c.title}\nURL: ${SITE_URL}/compare/${c.slug}\n${c.intro}\n\n| Factor | ${c.a} | ${c.b} |\n|---|---|---|\n${c.rows.map((r) => `| ${r[0]} | ${r[1]} | ${r[2]} |`).join("\n")}\n\nChoose ${c.a.toLowerCase()} if: ${c.chooseA.join("; ")}.\nChoose ${c.b.toLowerCase()} if: ${c.chooseB.join("; ")}.\nOur take: ${c.verdict}`).join("\n\n")}`);
-  parts.push(`## Industries\n\n${industries.map((i) => `### ${i.name}\nURL: ${SITE_URL}/industries/${i.slug}\nFor ${i.who}. Common problems: ${i.pains.join("; ")}.`).join("\n\n")}`);
+  parts.push(`## Industries\n\n${industries.filter((i) => industryHubs.includes(i.slug)).map((i) => `### ${i.name}\nURL: ${SITE_URL}/industries/${i.slug}\nFor ${i.who}. Common problems: ${i.pains.join("; ")}.\nPages: ${industryPairs.filter((p) => p.industry === i.slug).map((p) => `${SITE_URL}/industries/${p.industry}/${p.service}`).join(", ")}`).join("\n\n")}`);
   parts.push(`## FAQ\n\n${faqs.map((f) => `### ${f.q}\n${f.a}`).join("\n\n")}`);
   parts.push(`## Articles\n\n${posts.map((p) => postToMarkdown(p).replace(/^# /, "### ")).join("\n---\n\n")}`);
   return parts.join("\n\n---\n\n") + "\n";
