@@ -88,7 +88,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         {related.length > 0 && (
           <section className="section alt">
             <div className="container head-center">
-              <p className="eyebrow">Proof</p>
               <h2>Where we&apos;ve <em>done it</em></h2>
               <div className="bento mt">
                 {related.map((p) => <ProjectCard key={p.slug} p={p} span={related.length === 1 ? 6 : related.length === 2 ? 3 : 2} />)}

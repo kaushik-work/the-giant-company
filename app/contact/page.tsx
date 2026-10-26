@@ -30,7 +30,6 @@ export default function ContactPage() {
         <section className="section cta-band contact-page">
           <div className="container contact">
             <div>
-              <p className="eyebrow">Contact</p>
               <h1 className="page-title">Let&apos;s build something <em>big</em>.</h1>
               <p className="section-sub">Tell us about your project and we&apos;ll get back to you within one business day.</p>
               <div className="info-stack">

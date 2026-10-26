@@ -61,7 +61,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <section className="hero project-hero">
           <div className="container">
             <Link href="/projects" className="back">← All projects</Link>
-            <p className="eyebrow">{p.industry}</p>
             <h1 className="page-title">{p.name}</h1>
             <p className="lead">{p.tagline}</p>
             <div className="hero-cta">

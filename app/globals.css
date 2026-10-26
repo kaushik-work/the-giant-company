@@ -830,3 +830,7 @@ em { letter-spacing: .005em; }
 .pj-card:hover .pj-link i, .pj-feature:hover .pj-link i { transform: translateX(4px); }
 @media (max-width: 960px) { .pj-grid { grid-template-columns: repeat(2, 1fr); } .pj-feature { grid-template-columns: 1fr; padding: 32px 26px; gap: 28px; } }
 @media (max-width: 640px) { .pj-grid { grid-template-columns: 1fr; } .pj-page { padding-top: 40px; padding-bottom: 64px; } .pj-head { margin-bottom: 32px; } .pj-card { padding: 26px; border-radius: 24px; } }
+
+/* Drop wide-tracked uppercase labels: they read as templated */
+.trust-label { text-transform: none; letter-spacing: 0; font-size: .95rem; font-weight: 500; }
+.pj-tag, .tag { text-transform: none; letter-spacing: 0; font-size: .85rem; font-weight: 600; }

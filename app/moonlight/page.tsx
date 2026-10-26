@@ -67,7 +67,6 @@ export default function MoonlightPage() {
         <section className="section pt0 moon-hero">
           <div className="container">
             <div className="moon-panel center">
-              <p className="eyebrow">Featured · AI product</p>
               <h1 className="page-title">Meet Moonlight.<br /><em>Trripah&apos;s AI trip planner.</em></h1>
               <p className="section-sub">
                 A Claude-powered travel chatbot with a personality. She adapts to Gen Z, millennials and
@@ -96,7 +95,6 @@ export default function MoonlightPage() {
 
         <section className="section">
           <div className="container head-center">
-            <p className="eyebrow">Personality</p>
             <h2>One planner, <em>every traveller</em></h2>
             <p className="section-sub">Moonlight reads who she is talking to and adjusts her style.</p>
             <div className="bento compact">
@@ -113,7 +111,6 @@ export default function MoonlightPage() {
 
         <section className="section alt">
           <div className="container head-center">
-            <p className="eyebrow">How it works</p>
             <h2>From first message to <em>qualified lead</em></h2>
             <ol className="flow-steps">
               {flow.map((f, i) => (
@@ -130,7 +127,6 @@ export default function MoonlightPage() {
 
         <section className="section">
           <div className="container head-center">
-            <p className="eyebrow">Under the hood</p>
             <h2>Built to be <em>safe in production</em></h2>
             <div className="bento compact">
               {guardrails.map((g) => (
@@ -149,7 +145,6 @@ export default function MoonlightPage() {
         {crm && (
           <section className="section alt">
             <div className="container head-center">
-              <p className="eyebrow">Connected</p>
               <h2>Leads flow into the <em>CRM</em></h2>
               <div className="bento mt"><ProjectCard p={crm} span={6} /></div>
               <div className="hero-cta mt center-cta">

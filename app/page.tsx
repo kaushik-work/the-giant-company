@@ -85,7 +85,6 @@ export default function Home() {
         {/* SERVICES */}
         <section id="services" className="section">
           <div className="container head-center">
-            <p className="eyebrow">What we do</p>
             <h2>End-to-end engineering, <em>one team</em></h2>
             <p className="section-sub">Delivered as a dedicated team or a fixed-scope project.</p>
             <ServicesBento />
@@ -97,7 +96,6 @@ export default function Home() {
         {/* AUTOMATION */}
         <section id="automation" className="section alt">
           <div className="container head-center">
-            <p className="eyebrow">Featured · Trripah CRM</p>
             <h2>Automation that runs a <em>travel business</em></h2>
             <p className="section-sub">What we built into the Trripah CRM so agents sell instead of copy-paste.</p>
             <div className="bento">
@@ -127,7 +125,6 @@ export default function Home() {
         {/* WORK */}
         <section id="work" className="section">
           <div className="container head-center">
-            <p className="eyebrow">Selected work</p>
             <h2>Products and platforms we&apos;ve <em>shipped</em></h2>
             <p className="section-sub">Across travel, education, real estate and trade.</p>
             <ProjectBento projects={projects} />
@@ -138,7 +135,6 @@ export default function Home() {
         {/* PROCESS */}
         <section id="process" className="section alt">
           <div className="container head-center">
-            <p className="eyebrow">How we work</p>
             <h2>From idea to <em>launch</em> in four steps</h2>
             <ol className="steps">
               {steps.map((s) => (
@@ -152,7 +148,6 @@ export default function Home() {
         {/* FAQ */}
         <section id="faq" className="section">
           <div className="container narrow head-center">
-            <p className="eyebrow">FAQ</p>
             <h2>Questions, <em>answered</em></h2>
             <Faq limit={4} schema={false} />
             <div className="hero-cta mt"><Link className="link-arrow" href="/faq">See all questions</Link></div>
@@ -162,7 +157,6 @@ export default function Home() {
         {/* CONTACT INFO */}
         <section id="contact" className="section">
           <div className="container head-center">
-            <p className="eyebrow">Get in touch</p>
             <h2>Let&apos;s build something <em>big</em>.</h2>
             <p className="section-sub">Tell us about your project and we&apos;ll get back to you within one business day.</p>
             <div className="info-grid">

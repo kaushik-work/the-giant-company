@@ -45,7 +45,6 @@ export default function ProcessPage() {
 
         <section className="section alt">
           <div className="container head-center">
-            <p className="eyebrow">Engagement</p>
             <h2>Ways to <em>work with us</em></h2>
             <div className="bento mt">
               {models.map((m) => (
