@@ -5,7 +5,7 @@ import type { Lead, Status } from "@/lib/leads";
 
 export type LeadRow = Omit<Lead, "status"> & {
   status: Status;
-  parsed: { needs: string[]; industry?: string; budget?: string; timeline?: string; details?: string; raw: string };
+  parsed: { needs: string[]; industry?: string; budget?: string; timeline?: string; details?: string; source?: string; raw: string };
 };
 
 const statuses: Status[] = ["new", "contacted", "won", "lost"];
@@ -84,6 +84,7 @@ export default function LeadsBoard({ initial }: { initial: LeadRow[] }) {
                   {l.parsed.industry && <div><dt>Industry</dt><dd>{l.parsed.industry}</dd></div>}
                   {l.parsed.budget && <div><dt>Budget</dt><dd>{l.parsed.budget}</dd></div>}
                   {l.parsed.timeline && <div><dt>Start</dt><dd>{l.parsed.timeline}</dd></div>}
+                  {l.parsed.source && <div><dt>Came from</dt><dd>{l.parsed.source}</dd></div>}
                 </dl>
                 {(l.parsed.details || l.parsed.raw) && <p className="adm-note">{l.parsed.details || l.parsed.raw}</p>}
               </div>

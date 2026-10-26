@@ -8,6 +8,7 @@ import ProjectCard from "@/components/ProjectCard";
 import { getService, services } from "@/lib/services";
 import { getProject } from "@/lib/projects";
 import { SITE_URL } from "@/lib/site";
+import { cities } from "@/lib/seo";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -95,6 +96,16 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
           </section>
         )}
+
+        <section className="section pt0">
+          <div className="container head-center">
+            <h2>{s.title} across India</h2>
+            <p className="section-sub">Built in Bengaluru, delivered remotely to clients across India and worldwide.</p>
+            <ul className="chips center-chips">
+              {cities.map((c) => <li key={c.slug}><Link href={`/services/${s.slug}/${c.slug}`}>{c.name}</Link></li>)}
+            </ul>
+          </div>
+        </section>
 
         <section className="section">
           <div className="container head-center">

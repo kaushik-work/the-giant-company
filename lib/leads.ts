@@ -43,6 +43,7 @@ export function parseMessage(message: string) {
     budget: out["budget"],
     timeline: out["timeline"],
     details: out["details"],
+    source: out["source"],
     raw: Object.keys(out).length ? "" : message,
   };
 }

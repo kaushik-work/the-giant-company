@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "./Icon";
 import { contact } from "@/lib/data";
 
@@ -34,6 +34,16 @@ export default function ContactFlow() {
   const [loading, setLoading] = useState(false);
   const [doneId, setDoneId] = useState<string | null>(null);
 
+  const [source, setSource] = useState("");
+
+  // Landing-page links can preselect a need (?need=CRM) and tell us which page the lead came from (?from=/path).
+  useEffect(() => {
+    const q = new URLSearchParams(location.search);
+    const need = q.get("need");
+    if (need && needs.some((n) => n.id === need)) setPicked([need]);
+    setSource(q.get("from") ?? "");
+  }, []);
+
   const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
   const canNext = step === 0 ? picked.length > 0 : step === 1 ? !!industry && !!timeline && company.trim().length >= 2 : step === 2 ? !!budget : true;
 
@@ -54,6 +64,7 @@ export default function ContactFlow() {
       `Budget: ${budget}`,
       `Timeline: ${timeline}`,
       details.trim() && `Details: ${details.trim()}`,
+      source && `Source: ${source}`,
     ].filter(Boolean).join("\n");
 
     setLoading(true);

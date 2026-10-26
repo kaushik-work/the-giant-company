@@ -215,6 +215,25 @@ export const projects: Project[] = [
     features: [{ title: "Workflow digitisation", text: "Replaces manual tracking with a shared digital process." }],
     stack: ["Web", "Workflow automation"],
   },
+  {
+    slug: "flightklub",
+    name: "FlightKlub",
+    industry: "Private Aviation",
+    tagline: "A private jet and helicopter charter website with quote requests.",
+    summary: "A search-ready charter website where customers request a jet or helicopter quote.",
+    overview:
+      "FlightKlub arranges private jet and helicopter charters in India. We built the website, set up its search optimisation and added the quote and enquiry flow that lets customers request a charter and get a response quickly.",
+    logo: "/logos/flightklub.png",
+    url: "https://www.flightklub.com",
+    icon: "rocket",
+    cls: "t3",
+    built: ["Charter website covering jets and helicopters", "Search optimisation: metadata, structured data and clean URLs", "Quote and enquiry flow for charter requests"],
+    features: [
+      { title: "Quote requests", text: "Customers send their route and dates and get a quote from the team." },
+      { title: "Built for search", text: "Pages and metadata set up so charter searches can find the site." },
+    ],
+    stack: ["Website", "SEO", "Quote and enquiry system"],
+  },
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
