@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
-import ContactForm from "@/components/ContactForm";
+import ContactFlow from "@/components/ContactFlow";
 import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
 import { contact } from "@/lib/data";
@@ -27,27 +27,33 @@ export default function ContactPage() {
       <JsonLd data={schema} />
       <Header />
       <main>
-        <section className="section cta-band contact-page">
-          <div className="container contact">
-            <div>
-              <h1 className="page-title">Let&apos;s build something <em>big</em>.</h1>
-              <p className="section-sub">Tell us about your project and we&apos;ll get back to you within one business day.</p>
-              <div className="info-stack">
-                <a className="info-card" href={`tel:${contact.phoneHref}`}>
-                  <span className="icon-chip"><Icon name="call" /></span>
-                  <small>Call us</small><strong>{contact.phone}</strong>
-                </a>
-                <a className="info-card" href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener">
-                  <span className="icon-chip"><Icon name="chat" /></span>
-                  <small>WhatsApp</small><strong>Chat with us</strong>
-                </a>
-                <a className="info-card" href={contact.mapUrl} target="_blank" rel="noopener">
-                  <span className="icon-chip"><Icon name="pin" /></span>
-                  <small>Visit us</small><strong>{contact.address}</strong>
-                </a>
+        <section className="section contact-page">
+          <div className="container">
+            <div className="ct-shell">
+              <aside className="ct-info">
+                <div>
+                  <h1>Let&apos;s build something <em>big</em>.</h1>
+                  <p>Tell us what you need in four quick steps. A real person calls you back within one business day.</p>
+                </div>
+                <ul className="ct-list">
+                  <li>
+                    <span className="icon-chip"><Icon name="chat" /></span>
+                    <div><h2>Chat to us</h2><p>Quick questions? Message us on WhatsApp.</p><a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener">Chat with us</a></div>
+                  </li>
+                  <li>
+                    <span className="icon-chip"><Icon name="pin" /></span>
+                    <div><h2>Office</h2><p>Come and say hello.</p><a href={contact.mapUrl} target="_blank" rel="noopener">{contact.address}</a></div>
+                  </li>
+                  <li>
+                    <span className="icon-chip"><Icon name="call" /></span>
+                    <div><h2>Phone</h2><p>Talk to us directly.</p><a href={`tel:${contact.phoneHref}`}>{contact.phone}</a></div>
+                  </li>
+                </ul>
+              </aside>
+              <div className="ct-flow">
+                <ContactFlow />
               </div>
             </div>
-            <ContactForm />
           </div>
         </section>
       </main>
