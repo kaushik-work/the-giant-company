@@ -11,7 +11,7 @@ export type LeadRow = Omit<Lead, "status"> & {
 const statuses: Status[] = ["new", "contacted", "won", "lost"];
 const label = (s: string) => s[0].toUpperCase() + s.slice(1);
 
-export default function LeadsBoard({ initial }: { initial: LeadRow[] }) {
+export default function LeadsBoard({ initial, storage }: { initial: LeadRow[]; storage: "redis" | "file" | "none" }) {
   const [leads, setLeads] = useState(initial);
   const [filter, setFilter] = useState<"all" | Status>("all");
   const [q, setQ] = useState("");
@@ -45,6 +45,13 @@ export default function LeadsBoard({ initial }: { initial: LeadRow[] }) {
           <p>{counts.all} enquiries from the website</p>
         </div>
       </div>
+
+      {storage === "none" && (
+        <p className="adm-warn" role="alert">
+          No lead storage is connected, so new enquiries are not being saved. Add an Upstash Redis database to this Vercel project (Storage tab), then redeploy.
+        </p>
+      )}
+      {storage === "file" && <p className="adm-note-local">Local file storage (development only).</p>}
 
       <div className="adm-stats">
         {statuses.map((s) => (

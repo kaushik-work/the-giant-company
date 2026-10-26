@@ -17,17 +17,113 @@ export type Lead = {
 
 const FILE = path.join(process.cwd(), "data", "submissions.json");
 
-export async function readLeads(): Promise<Lead[]> {
+// ---- Storage ----
+// Production (Vercel): Upstash Redis over REST, if its env vars are set. Local dev: a JSON file.
+// On Vercel with no Redis configured there is nowhere durable to write, and we say so instead of pretending.
+const KV_URL = () => process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "";
+const KV_TOKEN = () => process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || "";
+const HASH = "gc:leads";
+
+export type StorageKind = "redis" | "file" | "none";
+export const storageKind = (): StorageKind => (KV_URL() && KV_TOKEN() ? "redis" : process.env.VERCEL ? "none" : "file");
+
+export class StorageUnavailable extends Error {
+  constructor() {
+    super("No durable lead storage is configured");
+  }
+}
+
+async function kv(...cmd: (string | number)[]) {
+  const res = await fetch(KV_URL(), {
+    method: "POST",
+    headers: { Authorization: `Bearer ${KV_TOKEN()}`, "Content-Type": "application/json" },
+    body: JSON.stringify(cmd),
+    cache: "no-store",
+  });
+  const json = (await res.json()) as { result?: unknown; error?: string };
+  if (!res.ok || json.error) throw new Error(json.error ?? `Redis error ${res.status}`);
+  return json.result;
+}
+
+async function readFileLeads(): Promise<Lead[]> {
   try {
     return JSON.parse(await fs.readFile(FILE, "utf8"));
   } catch {
     return [];
   }
 }
-
-export async function writeLeads(list: Lead[]) {
+async function writeFileLeads(list: Lead[]) {
   await fs.mkdir(path.dirname(FILE), { recursive: true });
   await fs.writeFile(FILE, JSON.stringify(list, null, 2));
+}
+
+export async function readLeads(): Promise<Lead[]> {
+  const kind = storageKind();
+  if (kind === "redis") {
+    const vals = ((await kv("HVALS", HASH)) as string[]) ?? [];
+    return vals.map((v) => JSON.parse(v) as Lead);
+  }
+  return kind === "file" ? readFileLeads() : [];
+}
+
+export async function addLead(lead: Lead) {
+  const kind = storageKind();
+  if (kind === "redis") {
+    await kv("HSET", HASH, lead.id, JSON.stringify(lead));
+  } else if (kind === "file") {
+    const list = await readFileLeads();
+    list.push(lead);
+    await writeFileLeads(list);
+  } else {
+    throw new StorageUnavailable();
+  }
+}
+
+export async function setLeadStatus(id: string, status: Status) {
+  const kind = storageKind();
+  if (kind === "redis") {
+    const raw = (await kv("HGET", HASH, id)) as string | null;
+    if (!raw) return false;
+    await kv("HSET", HASH, id, JSON.stringify({ ...(JSON.parse(raw) as Lead), status }));
+    return true;
+  }
+  if (kind === "file") {
+    const list = await readFileLeads();
+    const l = list.find((x) => x.id === id);
+    if (!l) return false;
+    l.status = status;
+    await writeFileLeads(list);
+    return true;
+  }
+  throw new StorageUnavailable();
+}
+
+export async function deleteLead(id: string) {
+  const kind = storageKind();
+  if (kind === "redis") return void (await kv("HDEL", HASH, id));
+  if (kind === "file") return writeFileLeads((await readFileLeads()).filter((l) => l.id !== id));
+  throw new StorageUnavailable();
+}
+
+// Optional email alert for each new lead, through Resend. Never blocks or fails the enquiry.
+export async function notifyLead(lead: Lead) {
+  const key = process.env.RESEND_API_KEY;
+  const to = process.env.LEAD_NOTIFY_EMAIL;
+  if (!key || !to) return;
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: process.env.RESEND_FROM || "The Gaint Company <onboarding@resend.dev>",
+        to: to.split(",").map((e) => e.trim()),
+        subject: `New enquiry: ${lead.name}${lead.company ? ` (${lead.company})` : ""}`,
+        text: `${lead.name}\n${lead.company ?? ""}\n${lead.phone}\n${lead.email ?? ""}\n\n${lead.message}\n\nReceived ${lead.createdAt}`,
+      }),
+    });
+  } catch {
+    /* alerts are best effort */
+  }
 }
 
 // The contact flow stores answers as "Label: value" lines in `message`; split them back out for display.

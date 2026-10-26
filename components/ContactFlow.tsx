@@ -31,6 +31,7 @@ export default function ContactFlow() {
   const [details, setDetails] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [formError, setFormError] = useState("");
+  const [fallback, setFallback] = useState(false);
   const [loading, setLoading] = useState(false);
   const [doneId, setDoneId] = useState<string | null>(null);
 
@@ -69,6 +70,7 @@ export default function ContactFlow() {
 
     setLoading(true);
     setFormError("");
+    setFallback(false);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -78,9 +80,13 @@ export default function ContactFlow() {
       const json = await res.json();
       if (res.ok && json.ok) setDoneId(json.id);
       else if (json.errors) setErrors(json.errors);
-      else setFormError(json.error ?? "Something went wrong. Please try again.");
+      else {
+        setFormError(json.error ?? "Something went wrong. Please try again.");
+        if (json.fallback) setFallback(true);
+      }
     } catch {
       setFormError("Network error. Please try again.");
+      setFallback(true);
     } finally {
       setLoading(false);
     }
@@ -175,6 +181,12 @@ export default function ContactFlow() {
               {errors.email && <small className="err-text">{errors.email}</small>}
             </label>
             {formError && <p className="form-status err" role="alert">{formError}</p>}
+            {fallback && (
+              <div className="cf-fallback">
+                <span>Your details are still here. Send them to us on WhatsApp instead and we will pick it up straight away.</span>
+                <a className="cf-btn" target="_blank" rel="noopener" href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(`Hi, I'm ${name} from ${company}.\n${picked.join(", ")} · ${industry} · ${budget} · ${timeline}\nPhone: ${phone}\nEmail: ${email}${details.trim() ? `\n${details.trim()}` : ""}`)}`}>Send on WhatsApp</a>
+              </div>
+            )}
           </>
         )}
       </div>

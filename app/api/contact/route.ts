@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 import { randomUUID } from "crypto";
+import { StorageUnavailable, addLead, notifyLead, type Lead } from "@/lib/leads";
 
 export const runtime = "nodejs";
-
-const FILE = path.join(process.cwd(), "data", "submissions.json");
 
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
@@ -32,18 +29,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });
   }
 
-  const entry = { id: randomUUID(), name, phone, email, company, message, status: "new", createdAt: new Date().toISOString() };
+  const entry: Lead = { id: randomUUID(), name, phone, email, company, message, status: "new", createdAt: new Date().toISOString() };
   try {
-    let list: unknown[] = [];
-    try {
-      list = JSON.parse(await fs.readFile(FILE, "utf8"));
-    } catch {}
-    list.push(entry);
-    await fs.mkdir(path.dirname(FILE), { recursive: true });
-    await fs.writeFile(FILE, JSON.stringify(list, null, 2));
-  } catch {
-    return NextResponse.json({ ok: false, error: "Could not save your enquiry" }, { status: 500 });
+    await addLead(entry);
+  } catch (e) {
+    const unavailable = e instanceof StorageUnavailable;
+    // Tell the visitor honestly, so the form can offer WhatsApp instead of losing the enquiry.
+    return NextResponse.json({ ok: false, fallback: true, error: unavailable ? "We could not save your enquiry right now." : "Could not save your enquiry" }, { status: unavailable ? 503 : 500 });
   }
-
+  await notifyLead(entry);
   return NextResponse.json({ ok: true, id: entry.id }, { status: 201 });
 }

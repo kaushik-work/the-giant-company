@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import { Crumbs, CtaBand } from "@/components/SeoBlocks";
+import BlogCard from "@/components/BlogCard";
 import { getAllPosts, getAllTags, tagSlug } from "@/lib/blog";
+import { accentFor } from "@/lib/blog-theme";
 
 export async function generateStaticParams() {
   return (await getAllTags()).map((t) => ({ tag: t.slug }));
@@ -36,14 +37,7 @@ export default async function TagPage({ params }: P) {
         <section className="section pt0">
           <div className="container">
             <div className="bl-grid">
-              {posts.map((p) => (
-                <Link key={p.slug} href={`/blog/${p.slug}`} className="bl-card">
-                  <span className="bl-meta">{p.pillar ? "Guide" : p.cluster} · {p.minutes} min read</span>
-                  <h2>{p.title}</h2>
-                  <p>{p.description}</p>
-                  <span className="pj-link">Read <i>→</i></span>
-                </Link>
-              ))}
+              {posts.map((p) => <BlogCard key={p.slug} p={{ ...p, accent: accentFor(p.cluster) }} />)}
             </div>
           </div>
         </section>

@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
+import BlogCard, { Byline } from "@/components/BlogCard";
 import { Crumbs, CtaBand, FaqBlock } from "@/components/SeoBlocks";
+import { accentFor } from "@/lib/blog-theme";
 import { getAllPosts, getPost, renderMarkdown, tagSlug } from "@/lib/blog";
 import { contactHref } from "@/lib/seo";
 import { getService } from "@/lib/services";
@@ -26,8 +28,6 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     openGraph: { type: "article", url: path, title: `${p.title} | The Gaint Company`, description: p.description, publishedTime: p.date, modifiedTime: p.updated },
   };
 }
-
-const fmt = (d: string) => new Date(d).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
 
 export default async function PostPage({ params }: P) {
   const post = await getPost((await params).slug);
@@ -59,11 +59,14 @@ export default async function PostPage({ params }: P) {
       <JsonLd data={schema} />
       <Header />
       <main>
-        <section className="page-hero">
-          <div className="container narrow">
+        <section className="post-hero">
+          <div className="container post-hero-in">
             <Crumbs items={[{ name: "Blog", href: "/blog" }, { name: post.title, href: path }]} />
-            <h1 className="page-title post-title">{post.title}</h1>
-            <p className="post-meta">By The Gaint Company team · Updated {fmt(post.updated)} · {post.minutes} min read</p>
+            <span className="bl-pill" style={{ "--bl-accent": accentFor(post.cluster) } as React.CSSProperties}>{post.cluster}</span>
+            <h1 className="post-title">{post.title}</h1>
+            <p className="post-lead">{post.description}</p>
+            <Byline date={post.updated} minutes={post.minutes} />
+            <img className="post-cover" src={`/blog-cover/${post.slug}`} alt="" width={1200} height={630} />
           </div>
         </section>
 
@@ -104,15 +107,8 @@ export default async function PostPage({ params }: P) {
           <section className="section pt0">
             <div className="container">
               <h2 className="head-center">Keep reading</h2>
-              <div className="bl-grid mt">
-                {more.map((p) => (
-                  <Link key={p.slug} href={`/blog/${p.slug}`} className="bl-card">
-                    <span className="bl-meta">{p.pillar ? "Guide" : p.cluster} · {p.minutes} min read</span>
-                    <h3>{p.title}</h3>
-                    <p>{p.description}</p>
-                    <span className="pj-link">Read <i>→</i></span>
-                  </Link>
-                ))}
+              <div className="bl-grid three mt">
+                {more.map((p) => <BlogCard key={p.slug} p={{ ...p, accent: accentFor(p.cluster) }} />)}
               </div>
             </div>
           </section>
