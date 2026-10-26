@@ -838,7 +838,7 @@ em { letter-spacing: .005em; }
 /* ================= Contact flow ================= */
 .contact-page { padding-top: 56px; padding-bottom: 96px; }
 .ct-shell { display: grid; grid-template-columns: 1fr 1.05fr; max-width: 1120px; margin: 0 auto; background: #fff; border: 1px solid #ececf0; border-radius: 36px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 30px 70px -30px rgba(14,14,18,.22); }
-.ct-info { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 52px 48px; }
+.ct-info { display: flex; flex-direction: column; justify-content: flex-start; gap: 44px; padding: 52px 48px; }
 .ct-info h1 { font-size: clamp(2rem, 3.6vw, 2.9rem); letter-spacing: -.035em; line-height: 1.08; margin-bottom: 14px; }
 .ct-list { list-style: none; display: grid; gap: 28px; }
 .ct-list li { display: flex; gap: 16px; align-items: flex-start; }
