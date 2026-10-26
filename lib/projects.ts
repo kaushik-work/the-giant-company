@@ -206,6 +206,9 @@ export const projects: Project[] = [
     summary: "Corporate web presence and digital workflows for an export-import business.",
     overview:
       "A business website paired with a digital workflow system that moves the company's export-import operations off manual processes.",
+    logo: "/logos/nap-meridian.png",
+    logoDark: true,
+    url: "https://www.napmeridian.com",
     icon: "ship",
     cls: "t3",
     built: ["Corporate website", "Digital workflow system for day-to-day export-import operations"],

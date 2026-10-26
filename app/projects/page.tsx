@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
-import ProjectBento from "@/components/ProjectBento";
+import ProjectsGrid from "@/components/ProjectsGrid";
 import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -13,12 +13,14 @@ export default function ProjectsPage() {
   return (
     <>
       <Header />
-      <main className="section">
+      <main className="section pj-page">
         <div className="container">
-          <p className="eyebrow">Our work</p>
-          <h1 className="page-title">Projects we&apos;ve shipped</h1>
-          <p className="section-sub">From AI chatbots to CRMs, SaaS products and business websites — across travel, education, real estate and trade.</p>
-          <ProjectBento projects={projects} />
+          <div className="pj-head">
+            <p className="eyebrow">Our work</p>
+            <h1 className="page-title">Projects we&apos;ve shipped</h1>
+            <p className="section-sub">AI chatbots, CRMs, SaaS products and business websites for travel, education, real estate and trade.</p>
+          </div>
+          <ProjectsGrid projects={projects} />
         </div>
       </main>
     </>

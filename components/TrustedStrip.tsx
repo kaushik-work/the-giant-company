@@ -1,15 +1,15 @@
 import { projects } from "@/lib/projects";
 
-type Item = { key: string; logo?: string; name: string };
+type Item = { key: string; logo?: string; name: string; dark?: boolean };
 
 const items: Item[] = [
   ...projects.filter((p) => p.logo && !p.logoDark).map((p) => ({ key: p.slug, logo: p.logo, name: p.name })),
-  { key: "nap", name: "Nap Meridian" },
+  { key: "nap", name: "Nap Meridian", logo: "/logos/nap-meridian.png", dark: true },
 ];
 
 function Cell({ it }: { it: Item }) {
   return (
-    <li className="trust-cell">
+    <li className={`trust-cell${it.dark ? " dark" : ""}`}>
       {it.logo ? <img src={it.logo} alt={`${it.name} logo`} loading="lazy" /> : <span className="trust-wordmark">{it.name}</span>}
     </li>
   );
