@@ -1047,3 +1047,5 @@ em { letter-spacing: .005em; }
 .adm-note-local { font-size: .8rem; margin-bottom: 14px; }
 .cf-fallback { background: #fff8e6; border: 1px solid #ffe2a3; border-radius: 16px; padding: 16px 18px; display: grid; gap: 10px; font-size: .92rem; color: #5c4300; }
 .cf-fallback a { justify-self: start; }
+
+.footer-legal { margin-top: 12px; font-size: .85rem; color: #8b8e9c; }

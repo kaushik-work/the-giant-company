@@ -13,8 +13,9 @@ export default function Footer() {
           <p className="footer-about">Custom software, CRMs and AI automation for growing businesses. Built in Bengaluru.</p>
           <address>
             {contact.address}<br />
-            <a href={`tel:${contact.phoneHref}`}>{contact.phone}</a> · <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener">WhatsApp</a>
+            <a href={`tel:${contact.phoneHref}`}>{contact.phone}</a>
           </address>
+          <p className="footer-legal">{contact.legalName} · GSTIN: {contact.gstin}</p>
         </div>
         <nav aria-label="Services">
           <h4>Services</h4>
