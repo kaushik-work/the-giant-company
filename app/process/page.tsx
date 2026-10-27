@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Skin from "@/components/Skin";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PageHero from "@/components/PageHero";
@@ -21,6 +22,7 @@ export default function ProcessPage() {
   return (
     <>
       <Header />
+      <Skin />
       <main>
         <PageHero eyebrow="How we work" title={<>From idea to <em>launch</em> in four steps</>}>
           A clear process with demos along the way, so you always know where the project stands.

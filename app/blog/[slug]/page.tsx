@@ -66,7 +66,6 @@ export default async function PostPage({ params }: P) {
             <h1 className="post-title">{post.title}</h1>
             <p className="post-lead">{post.description}</p>
             <Byline date={post.updated} minutes={post.minutes} />
-            <img className="post-cover" src={`/blog-cover/${post.slug}`} alt="" width={1200} height={630} />
           </div>
         </section>
 

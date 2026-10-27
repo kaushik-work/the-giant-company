@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Skin from "@/components/Skin";
 import Header from "@/components/Header";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import { projects } from "@/lib/projects";
@@ -13,6 +14,7 @@ export default function ProjectsPage() {
   return (
     <>
       <Header />
+      <Skin />
       <main className="section pj-page">
         <div className="container">
           <div className="pj-head">

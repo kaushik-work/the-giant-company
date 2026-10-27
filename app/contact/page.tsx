@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Skin from "@/components/Skin";
 import Header from "@/components/Header";
 import ContactFlow from "@/components/ContactFlow";
 import Icon from "@/components/Icon";
@@ -26,6 +27,7 @@ export default function ContactPage() {
     <>
       <JsonLd data={schema} />
       <Header />
+      <Skin />
       <main>
         <section className="section contact-page">
           <div className="container">

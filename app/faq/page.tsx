@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Skin from "@/components/Skin";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PageHero from "@/components/PageHero";
@@ -14,6 +15,7 @@ export default function FaqPage() {
   return (
     <>
       <Header />
+      <Skin />
       <main>
         <PageHero eyebrow="FAQ" title={<>Questions, <em>answered</em></>}>
           Can&apos;t find what you&apos;re looking for? Call or message us.
