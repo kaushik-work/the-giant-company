@@ -11,7 +11,7 @@ export type LeadRow = Omit<Lead, "status"> & {
 const statuses: Status[] = ["new", "contacted", "won", "lost"];
 const label = (s: string) => s[0].toUpperCase() + s.slice(1);
 
-export default function LeadsBoard({ initial, storage }: { initial: LeadRow[]; storage: "redis" | "file" | "none" }) {
+export default function LeadsBoard({ initial, storage, dbError }: { initial: LeadRow[]; storage: "mongodb" | "redis" | "file" | "none"; dbError?: boolean }) {
   const [leads, setLeads] = useState(initial);
   const [filter, setFilter] = useState<"all" | Status>("all");
   const [q, setQ] = useState("");
@@ -46,9 +46,14 @@ export default function LeadsBoard({ initial, storage }: { initial: LeadRow[]; s
         </div>
       </div>
 
+      {dbError && (
+        <p className="adm-warn" role="alert">
+          Could not reach the lead database. Check that MONGODB_URI is correct and that the database allows connections from Vercel (network access), then reload.
+        </p>
+      )}
       {storage === "none" && (
         <p className="adm-warn" role="alert">
-          No lead storage is connected, so new enquiries are not being saved. Add an Upstash Redis database to this Vercel project (Storage tab), then redeploy.
+          No lead storage is connected, so new enquiries are not being saved. Set MONGODB_URI in the Vercel project settings (or add an Upstash Redis database), then redeploy.
         </p>
       )}
       {storage === "file" && <p className="adm-note-local">Local file storage (development only).</p>}

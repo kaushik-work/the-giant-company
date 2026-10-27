@@ -18,14 +18,33 @@ export type Lead = {
 const FILE = path.join(process.cwd(), "data", "submissions.json");
 
 // ---- Storage ----
-// Production (Vercel): Upstash Redis over REST, if its env vars are set. Local dev: a JSON file.
-// On Vercel with no Redis configured there is nowhere durable to write, and we say so instead of pretending.
+// Order of preference: MongoDB (MONGODB_URI), then Upstash Redis over REST, then a local JSON file for development.
+// On Vercel with neither configured there is nowhere durable to write, and we say so instead of pretending.
+// MongoDB uses its own database (MONGODB_DB, default "gaint_company") so it never touches other projects' data on the same cluster.
 const KV_URL = () => process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "";
 const KV_TOKEN = () => process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || "";
 const HASH = "gc:leads";
 
-export type StorageKind = "redis" | "file" | "none";
-export const storageKind = (): StorageKind => (KV_URL() && KV_TOKEN() ? "redis" : process.env.VERCEL ? "none" : "file");
+export type StorageKind = "mongodb" | "redis" | "file" | "none";
+export const storageKind = (): StorageKind =>
+  process.env.MONGODB_URI ? "mongodb" : KV_URL() && KV_TOKEN() ? "redis" : process.env.VERCEL ? "none" : "file";
+
+type MongoLead = Omit<Lead, "id"> & { _id: string };
+const globalForMongo = globalThis as unknown as { _gcMongo?: Promise<import("mongodb").Collection<MongoLead>> };
+
+// One client per server instance, reused across requests.
+function leadsCollection() {
+  if (!globalForMongo._gcMongo) {
+    globalForMongo._gcMongo = import("mongodb").then(async ({ MongoClient }) => {
+      const client = new MongoClient(process.env.MONGODB_URI as string, { serverSelectionTimeoutMS: 8000 });
+      await client.connect();
+      return client.db(process.env.MONGODB_DB || "gaint_company").collection<MongoLead>("leads");
+    });
+    globalForMongo._gcMongo.catch(() => { globalForMongo._gcMongo = undefined; });
+  }
+  return globalForMongo._gcMongo;
+}
+const fromDoc = ({ _id, ...rest }: MongoLead): Lead => ({ id: _id, ...rest });
 
 export class StorageUnavailable extends Error {
   constructor() {
@@ -59,6 +78,9 @@ async function writeFileLeads(list: Lead[]) {
 
 export async function readLeads(): Promise<Lead[]> {
   const kind = storageKind();
+  if (kind === "mongodb") {
+    return (await (await leadsCollection()).find({}).sort({ createdAt: -1 }).toArray()).map(fromDoc);
+  }
   if (kind === "redis") {
     const vals = ((await kv("HVALS", HASH)) as string[]) ?? [];
     return vals.map((v) => JSON.parse(v) as Lead);
@@ -68,7 +90,10 @@ export async function readLeads(): Promise<Lead[]> {
 
 export async function addLead(lead: Lead) {
   const kind = storageKind();
-  if (kind === "redis") {
+  if (kind === "mongodb") {
+    const { id, ...rest } = lead;
+    await (await leadsCollection()).insertOne({ _id: id, ...rest });
+  } else if (kind === "redis") {
     await kv("HSET", HASH, lead.id, JSON.stringify(lead));
   } else if (kind === "file") {
     const list = await readFileLeads();
@@ -81,6 +106,9 @@ export async function addLead(lead: Lead) {
 
 export async function setLeadStatus(id: string, status: Status) {
   const kind = storageKind();
+  if (kind === "mongodb") {
+    return (await (await leadsCollection()).updateOne({ _id: id }, { $set: { status } })).matchedCount > 0;
+  }
   if (kind === "redis") {
     const raw = (await kv("HGET", HASH, id)) as string | null;
     if (!raw) return false;
@@ -100,6 +128,7 @@ export async function setLeadStatus(id: string, status: Status) {
 
 export async function deleteLead(id: string) {
   const kind = storageKind();
+  if (kind === "mongodb") return void (await (await leadsCollection()).deleteOne({ _id: id }));
   if (kind === "redis") return void (await kv("HDEL", HASH, id));
   if (kind === "file") return writeFileLeads((await readFileLeads()).filter((l) => l.id !== id));
   throw new StorageUnavailable();
