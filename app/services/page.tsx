@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Skin from "@/components/Skin";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PageHero from "@/components/PageHero";
@@ -30,6 +31,7 @@ export default function ServicesPage() {
     <>
       <JsonLd data={schema} />
       <Header />
+      <Skin />
       <main>
         <PageHero eyebrow="What we do" title={<>End-to-end engineering, <em>one team</em></>}>
           Delivered as a dedicated team or a fixed-scope project.

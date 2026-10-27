@@ -29,7 +29,6 @@ export default function BlogIndex({ posts, categories }: { posts: PostCard[]; ca
       {!filtering && (
         <>
           <Link href={`/blog/${featured.slug}`} className="bl-hero" style={{ "--bl-accent": featured.accent } as React.CSSProperties}>
-            <img src={`/blog-cover/${featured.slug}`} alt="" width={1200} height={630} />
             <div className="bl-hero-body">
               <span className="bl-pill on-dark">Featured guide · {featured.cluster}</span>
               <h2>{featured.title}</h2>

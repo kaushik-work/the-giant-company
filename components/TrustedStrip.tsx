@@ -20,7 +20,10 @@ export default function TrustedStrip() {
   return (
     <section className="trusted" aria-label="Businesses we have built for">
       <div className="container">
-        <p className="trust-label">Trusted by businesses across travel, education, real estate &amp; trade</p>
+        <p className="trust-label">
+          <span className="trust-sticker">Trusted by</span>
+          <span className="trust-sub">businesses across <b>travel</b><i aria-hidden="true" /><b>education</b><i aria-hidden="true" /><b>real estate</b><i aria-hidden="true" /><b>trade</b></span>
+        </p>
       </div>
       <div className="trust-marquee">
         <ul className="trust-track">

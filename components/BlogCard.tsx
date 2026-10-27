@@ -20,7 +20,6 @@ export function Byline({ date, minutes }: { date: string; minutes: number }) {
 export default function BlogCard({ p }: { p: PostCard }) {
   return (
     <Link href={`/blog/${p.slug}`} className="bl-card" style={{ "--bl-accent": p.accent } as React.CSSProperties}>
-      <img className="bl-cover" src={`/blog-cover/${p.slug}`} alt="" width={1200} height={630} loading="lazy" />
       <div className="bl-body">
         <span className="bl-pill">{p.cluster}</span>
         <h3>{p.title}</h3>

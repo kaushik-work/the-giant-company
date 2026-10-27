@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Skin from "@/components/Skin";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
@@ -57,6 +58,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     <>
       <JsonLd data={schema} />
       <Header />
+      <Skin />
       <main>
         <section className="hero project-hero">
           <div className="container">
