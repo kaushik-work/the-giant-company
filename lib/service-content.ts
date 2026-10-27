@@ -17,6 +17,7 @@ export const coreContent: Record<string, Partial<Service>> = {
       { q: "How long does a custom software project take?", a: "It depends on scope, which we agree in writing before building. We favour a usable first release in weeks, then add features based on how people actually use it." },
       { q: "Who owns the code?", a: "You do. The code, the data and the accounts are in your name, with documentation so another team could take over." },
       { q: "Do you work with companies outside Bangalore?", a: "Yes. We work remotely with clients across India and worldwide, with a demo at the end of each sprint and a shared progress board." },
+      { q: "Are you a custom software development company in India?", a: "Yes. We are a software development company in Bangalore building custom software, CRMs, mobile apps and automation for clients across India and worldwide, with scope, timeline and cost agreed in writing before the build starts." },
     ],
   },
   "crm-development": {

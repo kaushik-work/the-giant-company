@@ -76,6 +76,8 @@ export const moreServices: Service[] = [
       "A mobile app earns its place when it does something the website cannot: works offline, sends useful notifications, uses the camera or location, or gives your regular users a faster daily workflow. If a mobile website would do, we will tell you.",
       "Our own Trripah app is a Flutter app for Android and iOS with a five-tab shell for home, the Moonlight AI concierge, flights, trips and profile. It runs on live data: group trips and leads against the Trripah CRM, the chat against the Moonlight service and flight fares from the backend.",
       "We build the app and the backend together so there is one source of truth, and we plan the release process for the Play Store and App Store from the start.",
+      "We build for Android and iOS together, and we are happy to start with Android alone when your users are all on Android, such as a field-staff app. As a Flutter app development company in Bangalore, we also work with clients across India and worldwide, with a working build to review after every sprint.",
+      "Cost depends on scope: screens and features, the backend and admin work behind the app, payments, offline use and design. We agree a written scope and estimate before building, and we explain the main cost drivers in our guide to mobile app development cost in India.",
     ],
     points: [
       { title: "One codebase for Android and iOS", text: "Flutter lets one team ship both platforms with consistent behaviour." },
@@ -94,6 +96,10 @@ export const moreServices: Service[] = [
       { q: "Can you build the backend too?", a: "Yes. We build the app and the backend together so there is one source of truth." },
       { q: "Will you publish the app to the stores?", a: "Yes. We handle build, testing and submission to the Play Store and App Store, in your developer accounts." },
       { q: "Can the app include an AI assistant?", a: "Yes. The Trripah app includes the Moonlight AI concierge." },
+      { q: "Do you build Android apps?", a: "Yes. We build Android and iOS apps together in Flutter, or Android only when your users are all on Android, such as a field-staff app." },
+      { q: "How much does mobile app development cost in India?", a: "It depends on the number of screens and features, the backend and admin work, payments, offline use and design. We agree a written scope and estimate before the build starts." },
+      { q: "Are you a Flutter app development company in Bangalore?", a: "Yes. We are based in Rajajinagar, Bangalore, build Flutter apps for Android and iOS, and work with clients across India and worldwide." },
+      { q: "How long does it take to build an app?", a: "It depends on scope. We favour a first version real users can try within weeks, then add features from what they actually use." },
     ],
   },
   {
