@@ -20,6 +20,36 @@ export const site = {
     "lead generation chatbot",
     "saas product development",
     "next.js development company",
+    // spelling variants and synonyms
+    "software development company bengaluru",
+    "bengaluru software company",
+    "bangalore software company",
+    "software company in india",
+    "it company in bangalore",
+    "web development company bangalore",
+    "web design company bengaluru",
+    "app development company bangalore",
+    "mobile app developers bangalore",
+    "custom software developers india",
+    "software developers near me",
+    "crm development company",
+    "chatbot development company india",
+    "business automation software",
+    "process automation company",
+    "the giant company",
+    "giant company bangalore",
+    "gaint company",
+    "the gaint company bangalore",
+    "thegaintcompany",
+    // common misspellings
+    "softwere development company",
+    "software developement company",
+    "website developement bangalore",
+    "banglore software company",
+    "bengalore software company",
+    "bangalure web development",
+    "chatbot developement",
+    "mobile aap development",
   ],
 
 };
@@ -28,6 +58,10 @@ export const faqs = [
   {
     q: "What does The Gaint Company build?",
     a: "We build custom software, CRMs, SaaS products, business websites, workflow automation and AI chatbots. Our own products include CampusGo (placement management) and Moonlight (an AI trip planner).",
+  },
+  {
+    q: "Is The Gaint Company the same as The Giant Company?",
+    a: "Yes. People often search for us as The Giant Company or Gaint Company. We are one IT and software company in Bangalore (Bengaluru), India, building websites, mobile apps, CRMs, chatbots and business automation.",
   },
   {
     q: "Where are you based and who do you work with?",
