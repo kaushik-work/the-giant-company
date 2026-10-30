@@ -1,3 +1,4 @@
+import { seoPackages, seoProductFaqs } from "./seo-packages";
 import { contact } from "./data";
 import { projects } from "./projects";
 import { allServices, services } from "./services";
@@ -47,6 +48,7 @@ ${comparisons.map((c) => `- [${c.title}](${SITE_URL}/compare/${c.slug}): ${c.int
 ${industries.filter((i) => industryHubs.includes(i.slug)).map((i) => `- [${i.name}](${SITE_URL}/industries/${i.slug}): software for ${i.who}`).join("\n")}
 
 ## SEO, AEO and GEO
+- [SEO packages](${SITE_URL}/seo): audit, technical foundation, growth retainer and AI search packages with scope, deliverables and FAQs
 - [SEO and AI Search Optimization](${SITE_URL}/services/seo-services): technical SEO, content, local SEO and visibility in ChatGPT, Perplexity and Google AI Overviews
 - [TheSuper30 alternatives](${SITE_URL}/blog/thesuper30-alternatives.md): ten SEO and AI-search agencies in India compared
 - [SEO vs GEO vs AEO](${SITE_URL}/blog/seo-vs-geo-vs-aeo.md): what each means and how they differ
@@ -70,6 +72,7 @@ export async function buildLlmsFull() {
   parts.push(`# ${site.name}: full content\n\n> ${about}\n\nSource: ${SITE_URL}. This file concatenates the main content of the site for language models. Canonical pages are on the website.`);
   parts.push(`## Contact\n- Phone / WhatsApp: ${contact.phone}\n- Address: ${contact.address}\n- Contact page: ${SITE_URL}/contact`);
   parts.push(`## Services\n\n${allServices.map((s) => `### ${s.title}\nURL: ${SITE_URL}/services/${s.slug}\n${s.intro}\n\n${(s.body ?? []).join("\n\n")}\n\n${s.points.map((x) => `- **${x.title}.** ${x.text}`).join("\n")}\n\nTechnology: ${s.stack.join(", ")}${(s.faqs ?? []).length ? `\n\nFAQ:\n${(s.faqs ?? []).map((f) => `- ${f.q} ${f.a}`).join("\n")}` : ""}`).join("\n\n")}`);
+  parts.push(`## SEO packages\n\nURL: ${SITE_URL}/seo\n\n${seoPackages.map((p) => `### ${p.name}\n${p.tagline} ${p.summary}\nBest for: ${p.forWho}\nDuration: ${p.duration}\nIncludes:\n${p.includes.map((x) => `- ${x}`).join("\n")}\nYou get: ${p.outcome}`).join("\n\n")}\n\nFAQ:\n${seoProductFaqs.map((f) => `- ${f.q} ${f.a}`).join("\n")}`);
   parts.push(`## Projects\n\n${projects.map((p) => `### ${p.name}\nURL: ${SITE_URL}${projectPath(p.slug)}${p.url ? `\nLive site: ${p.url}` : ""}\nIndustry: ${p.industry}\n${p.overview}\n\nWhat we built:\n${p.built.map((b) => `- ${b}`).join("\n")}\n\nTechnology: ${p.stack.join(", ")}`).join("\n\n")}`);
   parts.push(`## Problems we solve\n\n${problems.map((p) => `### ${p.title}\nURL: ${SITE_URL}/solutions/${p.slug}\nProblem: ${p.problem}\nCost: ${p.cost}\nHow we fix it:\n${p.steps.map((s) => `- **${s.title}.** ${s.text}`).join("\n")}`).join("\n\n")}`);
   parts.push(`## Comparisons\n\n${comparisons.map((c) => `### ${c.title}\nURL: ${SITE_URL}/compare/${c.slug}\n${c.intro}\n\n| Factor | ${c.a} | ${c.b} |\n|---|---|---|\n${c.rows.map((r) => `| ${r[0]} | ${r[1]} | ${r[2]} |`).join("\n")}\n\nChoose ${c.a.toLowerCase()} if: ${c.chooseA.join("; ")}.\nChoose ${c.b.toLowerCase()} if: ${c.chooseB.join("; ")}.\nOur take: ${c.verdict}`).join("\n\n")}`);

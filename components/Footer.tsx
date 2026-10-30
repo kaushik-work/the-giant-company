@@ -31,6 +31,7 @@ export default function Footer() {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/services">All services</Link></li>
             <li><Link href="/moonlight">Moonlight AI</Link></li>
+            <li><Link href="/seo">SEO packages</Link></li>
             <li><Link href="/projects">All projects</Link></li>
             <li><Link href="/process">How we work</Link></li>
             <li><Link href="/faq">FAQ</Link></li>

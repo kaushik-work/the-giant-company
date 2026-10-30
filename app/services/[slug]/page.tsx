@@ -81,7 +81,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <p className="section-sub">{s.intro}</p>
             <div className="hero-cta center-cta">
               <Link className="btn btn-red" href={cta}>Discuss your project</Link>
-              <Link className="link-arrow" href="/projects">See our work</Link>
+              {s.slug === "seo-services" ? <Link className="link-arrow" href="/seo">See SEO packages</Link> : <Link className="link-arrow" href="/projects">See our work</Link>}
             </div>
           </div>
         </section>
