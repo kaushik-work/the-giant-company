@@ -54,8 +54,7 @@ export default function ContactFlow() {
     if (name.trim().length < 2) errs.name = "Enter your name";
     if (!/^\+?[0-9\s-]{10,15}$/.test(phone.trim())) errs.phone = "Enter a valid phone number";
     const em = email.trim().toLowerCase();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) errs.email = "Enter a valid work email";
-    else if (/@(gmail|googlemail)\.com$/.test(em)) errs.email = "Please use your work email, not Gmail";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) errs.email = "Enter a valid email";
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
