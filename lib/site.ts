@@ -76,6 +76,14 @@ export const faqs = [
     a: "Yes. Moonlight, Trripah's AI trip planner, is built on Claude with a custom persona, destination knowledge and automatic lead capture into a CRM. We build chatbots for sales, support and planning use cases.",
   },
   {
+    q: "Do you offer SEO and AI search (GEO) services?",
+    a: "Yes. We do technical SEO, content strategy, local SEO and AI search optimization so your business is found on Google and cited by tools like ChatGPT, Perplexity and Google AI Overviews. We start with a free SEO and AI-search audit and do not guarantee rankings.",
+  },
+  {
+    q: "What is the difference between SEO, GEO and AEO?",
+    a: "SEO earns rankings and clicks in search results. AEO (answer engine optimization) shapes content so it can be used as a direct answer or featured snippet. GEO (generative engine optimization) makes content clear and trustworthy enough for AI tools to cite. They share the same foundations: useful content, clean technical set-up and a clear brand identity.",
+  },
+  {
     q: "How long does a project take?",
     a: "A business website typically takes 2 to 4 weeks. CRMs, SaaS products and AI systems are built in iterative sprints with demos, usually starting with a usable first version in 6 to 10 weeks.",
   },

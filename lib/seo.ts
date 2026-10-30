@@ -319,6 +319,7 @@ export const needFor: Record<string, string> = {
   "nextjs-development": "Website",
   "web-application-development": "Custom software",
   "website-redesign": "Website",
+  "seo-services": "Website",
   "website-maintenance": "Website",
   "travel-software-development": "CRM",
   "education-software-development": "Custom software",

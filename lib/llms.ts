@@ -12,7 +12,7 @@ export function postToMarkdown(p: Post) {
   return `# ${p.title}\n\n> ${p.description}\n\n- URL: ${SITE_URL}/blog/${p.slug}\n- Published: ${p.date}\n- Updated: ${p.updated}\n- Author: The Gaint Company team\n- Topics: ${p.tags.join(", ")}\n\n${p.body}${faq}\n`;
 }
 
-const about = `The Gaint Company is a software and website development company based in Rajajinagar, Bangalore (Bengaluru), India. It builds custom software, CRMs, SaaS products, websites, workflow automation, AI chatbots and WhatsApp chatbots, and works with clients across India and worldwide, mostly remotely. It does not publish fixed prices; scope and cost are agreed in writing before a build starts. It does not guarantee search rankings.`;
+const about = `The Gaint Company is a software and website development company based in Rajajinagar, Bangalore (Bengaluru), India. It builds custom software, CRMs, SaaS products, websites, workflow automation, AI chatbots, WhatsApp chatbots, and SEO and AI search (GEO/AEO) optimization, and works with clients across India and worldwide, mostly remotely. It does not publish fixed prices; scope and cost are agreed in writing before a build starts. It does not guarantee search rankings.`;
 
 export async function buildLlmsTxt() {
   const posts = await getAllPosts();
@@ -45,6 +45,11 @@ ${comparisons.map((c) => `- [${c.title}](${SITE_URL}/compare/${c.slug}): ${c.int
 
 ## Industries
 ${industries.filter((i) => industryHubs.includes(i.slug)).map((i) => `- [${i.name}](${SITE_URL}/industries/${i.slug}): software for ${i.who}`).join("\n")}
+
+## SEO, AEO and GEO
+- [SEO and AI Search Optimization](${SITE_URL}/services/seo-services): technical SEO, content, local SEO and visibility in ChatGPT, Perplexity and Google AI Overviews
+- [TheSuper30 alternatives](${SITE_URL}/blog/thesuper30-alternatives.md): ten SEO and AI-search agencies in India compared
+- [SEO vs GEO vs AEO](${SITE_URL}/blog/seo-vs-geo-vs-aeo.md): what each means and how they differ
 
 ## Where we work
 - [Locations](${SITE_URL}/locations): Custom software development and web development pages for ${cities.map((c) => c.name).join(", ")}, at ${SITE_URL}/services/<service>/<city> for ${cityServiceSlugs.join(" and ")}.

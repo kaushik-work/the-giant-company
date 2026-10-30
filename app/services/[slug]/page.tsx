@@ -61,6 +61,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         url: `${SITE_URL}/services/${s.slug}`,
         provider: { "@id": `${SITE_URL}/#organization` },
         areaServed: { "@type": "Country", name: "India" },
+        ...(s.slug === "seo-services" ? { serviceType: ["Search engine optimization", "Generative engine optimization", "Answer engine optimization", "Technical SEO", "Local SEO"] } : {}),
+        ...(s.points.length ? { hasOfferCatalog: { "@type": "OfferCatalog", name: s.title, itemListElement: s.points.map((x) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: x.title, description: x.text } })) } } : {}),
       },
     ],
   };
