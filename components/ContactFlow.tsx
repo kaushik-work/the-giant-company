@@ -136,13 +136,13 @@ export default function ContactFlow() {
             <p className="cf-label">What kind of business is it?</p>
             <div className="cf-chips">
               {industries.map((i) => (
-                <button type="button" key={i} className={`cf-chip${industry === i ? " on" : ""}`} aria-pressed={industry === i} onClick={() => setIndustry(i)}>{i}</button>
+                <button type="button" key={i} className={`cf-chip${industry === i ? " on" : ""}`} aria-pressed={industry === i} onClick={() => { setIndustry(i); if (timeline && company.trim().length >= 2) setStep(2); }}>{i}</button>
               ))}
             </div>
             <p className="cf-label">When do you want to start?</p>
             <div className="cf-chips">
               {timelines.map((t) => (
-                <button type="button" key={t} className={`cf-chip${timeline === t ? " on" : ""}`} aria-pressed={timeline === t} onClick={() => setTimeline(t)}>{t}</button>
+                <button type="button" key={t} className={`cf-chip${timeline === t ? " on" : ""}`} aria-pressed={timeline === t} onClick={() => { setTimeline(t); if (industry && company.trim().length >= 2) setStep(2); }}>{t}</button>
               ))}
             </div>
           </>
@@ -154,12 +154,9 @@ export default function ContactFlow() {
             <p className="cf-hint">A rough range is fine. It helps us suggest the right approach.</p>
             <div className="cf-chips big">
               {budgets.map((b) => (
-                <button type="button" key={b} className={`cf-chip${budget === b ? " on" : ""}`} aria-pressed={budget === b} onClick={() => setBudget(b)}>{b}</button>
+                <button type="button" key={b} className={`cf-chip${budget === b ? " on" : ""}`} aria-pressed={budget === b} onClick={() => { setBudget(b); setStep(3); }}>{b}</button>
               ))}
             </div>
-            <label>Anything else? <span className="cf-opt">Optional</span>
-              <textarea value={details} onChange={(e) => setDetails(e.target.value)} rows={4} placeholder="What problem are you trying to solve?" />
-            </label>
           </>
         )}
 
@@ -178,6 +175,9 @@ export default function ContactFlow() {
             <label>Work email
               <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className={errors.email ? "invalid" : ""} autoComplete="email" placeholder="you@company.com" />
               {errors.email && <small className="err-text">{errors.email}</small>}
+            </label>
+            <label>Anything else? <span className="cf-opt">Optional</span>
+              <textarea value={details} onChange={(e) => setDetails(e.target.value)} rows={4} placeholder="What problem are you trying to solve?" />
             </label>
             {formError && <p className="form-status err" role="alert">{formError}</p>}
             {fallback && (
