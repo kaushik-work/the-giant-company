@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
 import { CtaBand, FaqBlock, LinkChips, SeoHero, Tiles } from "@/components/SeoBlocks";
 import { contactHref } from "@/lib/seo";
+import { disciplines } from "@/lib/seo-disciplines";
 import { matrix, measures, roadmap, seoPackages, seoProductFaqs } from "@/lib/seo-packages";
 import { SITE_URL } from "@/lib/site";
 
@@ -89,6 +90,16 @@ export default function SeoProductPage() {
 
         <section className="section alt">
           <div className="container head-center">
+            <h2>SEO, AEO and GEO, <em>explained</em></h2>
+            <p className="section-sub">Three goals, one foundation. Each has its own page with the checklist, measures and mistakes we watch for.</p>
+            <div className="mt">
+              <Tiles items={disciplines.map((d) => ({ title: `${d.short}: ${d.name}`, text: `${d.goal} ${d.definition}`, href: `/seo/${d.slug}` }))} span={2} />
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container head-center">
             <h2>Compare the <em>packages</em></h2>
             <p className="section-sub">Mix and match. Most clients start with the audit and continue with what it shows they need.</p>
             <div className="seo-matrix-wrap mt">
@@ -146,6 +157,7 @@ export default function SeoProductPage() {
         <LinkChips
           heading="Read more"
           links={[
+            ...disciplines.map((d) => ({ label: `${d.short} services`, href: `/seo/${d.slug}` })),
             { label: "SEO service overview", href: "/services/seo-services" },
             { label: "SEO vs GEO vs AEO", href: "/blog/seo-vs-geo-vs-aeo" },
             { label: "TheSuper30 alternatives", href: "/blog/thesuper30-alternatives" },

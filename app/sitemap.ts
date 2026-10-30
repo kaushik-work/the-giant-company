@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/lib/projects";
 import { allServices, services } from "@/lib/services";
+import { disciplines } from "@/lib/seo-disciplines";
 import { SITE_URL } from "@/lib/site";
 import { getAllPosts, getAllTags } from "@/lib/blog";
 import { cities, comparisons, hasCityPage, industryHubs, industryPairs, problems } from "@/lib/seo";
@@ -30,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...allServices.map((sv) => ({ url: `${SITE_URL}/services/${sv.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${SITE_URL}/seo`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    ...disciplines.map((d) => ({ url: `${SITE_URL}/seo/${d.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${SITE_URL}/process`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${SITE_URL}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
